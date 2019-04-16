@@ -11,7 +11,9 @@
 library(readxl)
 library(writexl)
 library(assertive)
-library(tidyverse)
+# library(tidyverse)
+library(dplyr)
+library(tidyr)
 library(lubridate)
 
 
@@ -28,17 +30,17 @@ files <- list.files("data/hrv/raw",
 ## ----------------- input and tidy each file within function ---------------------
 
 read_hrv_file <- function(file){
-  print(file) 
-  read_xlsx(file, sheet = 1) %>% 
-    gather(-`Segment Number`, 
-           key = "segment", 
-           value = "value") %>% 
-    spread(key = `Segment Number`, 
-           value = value) %>% 
-    select(-`End Event`, 
-           -`Start Event`, 
-           -`Manual Override`, 
-           -`Threshold (volts)`) %>% 
+  print(file)
+  read_xlsx(file, sheet = 1) %>%
+    gather(-`Segment Number`,
+           key = "segment",
+           value = "value") %>%
+    spread(key = `Segment Number`,
+           value = value) %>%
+    select(-`End Event`,
+           -`Start Event`,
+           -`Manual Override`,
+           -`Threshold (volts)`) %>%
     rename(segment = segment,
            start_time = `Start Time`,
            end_time = `End Time`,
@@ -59,7 +61,7 @@ read_hrv_file <- function(file){
            rmssd = RMSSD,
            nn50 = NN50,
            pnn50 = pNN50) %>%
-    mutate_all(as.numeric) %>% 
+    mutate_all(as.numeric) %>%
     mutate(file_name = sub(".xlsx", "", basename(file)))
   }
 
@@ -68,13 +70,13 @@ read_hrv_file <- function(file){
 ## -------- reformat editing stat sheet within function ----------------------
 
 read_edit_sheet <- function(file){
-  print(file) 
-  read_xlsx(file, sheet = 8) %>% 
-    gather(-`Segment Number`, 
-           key = "segment", 
-           value = "value") %>% 
-    spread(key = `Segment Number`, 
-           value = value) %>% 
+  print(file)
+  read_xlsx(file, sheet = 8) %>%
+    gather(-`Segment Number`,
+           key = "segment",
+           value = "value") %>%
+    spread(key = `Segment Number`,
+           value = value) %>%
     rename(segment = segment,
            ecg_sec_cut = `ECG : Seconds Removed`,
            ecg_perc_cut = `ECG : Percentage Removed`,
@@ -93,7 +95,7 @@ read_edit_sheet <- function(file){
            art_r_peaks_perc = `% Artifact Peaks`,
            dur_est_r_r = `Duration of Estimated R-R Intervals`,
            est_r_r_perc = `% of Estimated R-R Intervals`) %>%
-    mutate_all(as.numeric) %>% 
+    mutate_all(as.numeric) %>%
     mutate(file_name = sub(".xlsx", "", basename(file)))
   }
 
@@ -145,15 +147,15 @@ parent_hrv_edits <- bind_rows(all_hrv_edits)
 
 ## ------ reorder segments, separate file_name, and reorder columns in hrv sheets ---
 
-parent_hrv <- parent_hrv %>% 
-  arrange(file_name, segment) %>% 
-  separate(col = file_name, 
+parent_hrv <- parent_hrv %>%
+  arrange(file_name, segment) %>%
+  separate(col = file_name,
            into = c("family", "individual", "task"),
-           sep = "_") %>% 
-  select(family, individual, 
-         task, segment, 
+           sep = "_") %>%
+  select(family, individual,
+         task, segment,
          seg_length, start_time, end_time,
-         rsa, mean_hr, 
+         rsa, mean_hr,
          resp_peak_freq, resp_rate,
          everything())
 
@@ -161,13 +163,13 @@ parent_hrv <- parent_hrv %>%
 
 ## ---------- reorder segments and separate file_name in edit sheets -----------
 
-parent_hrv_edits <- parent_hrv_edits %>% 
-  arrange(file_name, segment) %>% 
-  separate(col = file_name, 
+parent_hrv_edits <- parent_hrv_edits %>%
+  arrange(file_name, segment) %>%
+  separate(col = file_name,
            into = c("family", "individual", "task"),
-           sep = "_") %>% 
-  select(family, individual, 
-         task, segment, 
+           sep = "_") %>%
+  select(family, individual,
+         task, segment,
          est_r_peaks_perc, est_r_peaks,
          norm_r_peaks, total_r_peaks,
          everything())
@@ -181,7 +183,7 @@ parent_hrv_edits <- parent_hrv_edits %>%
 
 
 hrv <- right_join(parent_hrv, parent_hrv_edits,
-           by = c("family", "individual", "task", "segment")) %>% 
+           by = c("family", "individual", "task", "segment")) %>%
   mutate_all(as.numeric)
 
 
@@ -189,11 +191,11 @@ hrv <- right_join(parent_hrv, parent_hrv_edits,
 
 
 ## --------------- filtering hrv data based on segment validity ---------------
-  
 
-valid_hrv <- hrv %>% 
-  filter(seg_length == 30) %>% 
-  filter(resp_peak_freq >= 0.120 & resp_peak_freq <= 0.400) %>% 
+
+valid_hrv <- hrv %>%
+  filter(seg_length == 30) %>%
+  filter(resp_peak_freq >= 0.120 & resp_peak_freq <= 0.400) %>%
   filter(est_r_peaks_perc <= 10.0)
 
 
@@ -202,12 +204,12 @@ valid_hrv <- hrv %>%
 
 ## --------------------- means, sd, variance per task ----------------------
 
-valid_hrv <- valid_hrv %>% 
-  group_by(family, individual, task) %>% 
+valid_hrv <- valid_hrv %>%
+  group_by(family, individual, task) %>%
   mutate(rsa_mean_task = mean(rsa),
          rsa_sd_task = sd(rsa),
-         rsa_var_task = var(rsa)) %>% 
-  select(family, individual, task, segment, 
+         rsa_var_task = var(rsa)) %>%
+  select(family, individual, task, segment,
          rsa, rsa_mean_task, rsa_sd_task, rsa_var_task,
          mean_hr,
          everything())

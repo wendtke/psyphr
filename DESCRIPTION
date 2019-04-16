@@ -18,4 +18,8 @@ Suggests:
     testthat
 Imports: 
     dplyr,
-    tidyr
+    tidyr,
+    readxl,
+    writexl,
+    lubridate,
+    assertive
