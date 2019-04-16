@@ -1,11 +1,12 @@
 #' Rename sheet columns after the sheet has been transformed.
 #'
 #' Functions to change the column names to be easier to use by later analysis scripts.
-#' They should only be called after transform_editing_sheet has already been used.
+#' They should only be called after transform_* has already been used.
 #'
-#' TODO: add error handling in case this is run before transform_editing_sheet has been run, and the
-#' column names are not as expected. I.e., detect whether the second calumn name is a number, and if so,
-#' exit out gracefully with a message to run transform_*_sheet function first.
+#' TODO: add error handling in case this is run before transform_* has been run,
+#' and the column names are not as expected. I.e., detect whether the second
+#' column name is a number, and if so,
+#' exit out gracefully with a message to run transform_* function first.
 #'
 #' @param sheet
 #'
@@ -13,7 +14,13 @@
 #' @export
 #'
 #' @examples
+#' rename_hrv_stats_columns(sheet_data)
 #' rename_hrv_editing_columns(sheet_data)
+#' rename_eda_stats_columns(sheet_data)
+#' rename_hrv_editing_columns(sheet_data)
+#'
+#'
+#'
 #'
 rename_hrv_editing_columns <- function(sheet) {
     sheet <- sheet %>%
@@ -41,3 +48,19 @@ rename_hrv_editing_columns <- function(sheet) {
 }
 
 
+rename_eda_stats_columns <- function(sheet){
+  sheet <- sheet %>%
+  dpylr::rename(segment = segment,
+           start_time = `Start Time`,
+           end_time = `End Time`,
+           seg_length = `Segment Duration`,
+           total_scr = `Total SCRs`,
+           er_scr = `ER-SCRs`,
+           ns_scrs = `NS-SCRs`,
+           tonic_scl = `Tonic SCL`,
+           mean_sc = `Mean SC`,
+           tonic_period = `Tonic Period`)
+
+  sheet
+
+}
