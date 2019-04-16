@@ -12,6 +12,8 @@
 #' @export
 #'
 #' @examples
+#'
+#'
 transform_settings_sheet <- function(file_name, sheet){
   sheet <- sheet %>%
     tidyr::gather(key = "setting",
