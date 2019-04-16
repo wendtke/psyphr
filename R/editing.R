@@ -12,7 +12,7 @@
 #'
 #' @examples
 #'
-transform_sheet <- function(file_name, sheet, rename_columns = TRUE){
+transform_editing_sheet <- function(file_name, sheet, rename_columns = TRUE){
   sheet_base <- sheet %>%
     gather(-`Segment Number`,
            key = "segment",
