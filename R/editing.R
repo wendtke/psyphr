@@ -1,49 +1,30 @@
 
 #' Process "Editing Stats" sheet
 #'
-#' The transform_sheet function ...
+#' The transform_editing_sheet function transforms the raw Editing Stats sheet to use the Segment Names as
+#' column names, make all values numeric, and add the name of the file as a column, so the data includes
+#' the source designation.
 #'
 #' @param file_name
 #' @param sheet
-#' @param rename_columns
 #'
-#' @return
+#' @return a dataframe of segment data with a column containing the file name
 #' @export
 #'
 #' @examples
+#' transform_editing_sheet(name_of_file, sheet_data)
 #'
-transform_sheet <- function(file_name, sheet, rename_columns = TRUE){
-  sheet_base <- sheet %>%
-    gather(-`Segment Number`,
+transform_editing_sheet <- function(file_name, sheet){
+  sheet <- sheet %>%
+    tidyr::gather(-`Segment Number`,
            key = "segment",
            value = "value") %>%
-    spread(key = `Segment Number`,
+    tidyr::spread(key = `Segment Number`,
            value = value) %>%
-    mutate_all(as.numeric) %>%
-    mutate(file_name = file_name)
-    # mutate(file_name = sub(".xlsx", "", basename(file_name)))
+    dplyr::mutate_all(as.numeric) %>%
+    dplyr::mutate(file_name = file_name)
 
-  if(rename_columns){
-    sheet_base <- sheet_base %>%
-    rename(segment = segment,
-           ecg_sec_cut = `ECG : Seconds Removed`,
-           ecg_perc_cut = `ECG : Percentage Removed`,
-           ecg_sec_est = `ECG : Seconds Estimated`,
-           ecg_perc_est = `ECG : Percentage Estimated`,
-           resp_sec_cut = `Resp : Seconds Removed`,
-           resp_perc_cut = `Resp : Percentage Removed`,
-           resp_sec_est = `Resp : Seconds Estimated`,
-           resp_perc_est = `Resp : Percentage Estimated`,
-           total_r_peaks = `Total Peaks`,
-           norm_r_peaks = `Normal Peaks`,
-           norm_r_perc = `% Normal Peaks`,
-           est_r_peaks = `Estimated Peaks`,
-           est_r_peaks_perc = `% Estimated Peaks`,
-           art_r_peaks = `Artifact Peaks`,
-           art_r_peaks_perc = `% Artifact Peaks`,
-           dur_est_r_r = `Duration of Estimated R-R Intervals`,
-           est_r_r_perc = `% of Estimated R-R Intervals`)
-  }
+  sheet
+
 }
-
 
