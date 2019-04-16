@@ -1,26 +1,28 @@
+#' Process "EDA Stats" sheet
+#'
+#' The transform_eda_sheet function transforms the raw EDA Stats sheet to use
+#' the Segment column names, make all values numeric, and add the name of the
+#' file as a column, so the data includes the source designation.
+#'
+#' @param file_name
+#' @param sheet
+#'
+#' @return a dataframe of segment data with a column containing the file name
+#' @export
+#'
+#' @examples
+#' transform_eda_sheet(name_of_file, sheet_data)
+#'
+transform_eda_sheet <- function(file_name, sheet){
+  sheet <- sheet %>%
+    tidyr::gather(-`Segment Number`,
+                  key = "segment",
+                  value = "value") %>%
+    tidyr::spread(key = `Segment Number`,
+                  value = value) %>%
+    dplyr::mutate_all(as.numeric) %>%
+    dplyr::mutate(file_name = file_name)
 
-## ----------------- input and tidy each file within function -----------------
+  sheet
 
-read_eda_file <- function(file){
-  print(file)
-  read_xlsx(file, sheet = 1) %>%
-    gather(-`Segment Number`,
-           key = "segment",
-           value = "value") %>%
-    spread(key = `Segment Number`,
-           value = value) %>%
-    select(-`End Event`,
-           -`Start Event`) %>%
-    rename(segment = segment,
-           start_time = `Start Time`,
-           end_time = `End Time`,
-           seg_length = `Segment Duration`,
-           total_scr = `Total SCRs`,
-           er_scr = `ER-SCRs`,
-           ns_scrs = `NS-SCRs`,
-           tonic_scl = `Tonic SCL`,
-           mean_sc = `Mean SC`,
-           tonic_period = `Tonic Period`) %>%
-    mutate_all(as.numeric) %>%
-    mutate(file_name = sub(".xlsx", "", basename(file)))
 }
