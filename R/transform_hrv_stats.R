@@ -1,4 +1,4 @@
-#' Process main "Stats" sheet
+#' Process "HRV Stats" sheet
 #'
 #' The transform_hrv_sheet function ...
 #'
