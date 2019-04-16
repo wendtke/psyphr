@@ -26,15 +26,15 @@ files <- list.files("data/raw",
 ## ----------------- input and tidy each file within function -----------------
 
 read_eda_file <- function(file){
-  print(file) 
-  read_xlsx(file, sheet = 1) %>% 
-    gather(-`Segment Number`, 
-           key = "segment", 
-           value = "value") %>% 
-    spread(key = `Segment Number`, 
-           value = value) %>% 
-    select(-`End Event`, 
-           -`Start Event`) %>% 
+  print(file)
+  read_xlsx(file, sheet = 1) %>%
+    gather(-`Segment Number`,
+           key = "segment",
+           value = "value") %>%
+    spread(key = `Segment Number`,
+           value = value) %>%
+    select(-`End Event`,
+           -`Start Event`) %>%
     rename(segment = segment,
            start_time = `Start Time`,
            end_time = `End Time`,
@@ -45,7 +45,7 @@ read_eda_file <- function(file){
            tonic_scl = `Tonic SCL`,
            mean_sc = `Mean SC`,
            tonic_period = `Tonic Period`) %>%
-    mutate_all(as.numeric) %>% 
+    mutate_all(as.numeric) %>%
     mutate(file_name = sub(".xlsx", "", basename(file)))
 }
 
@@ -54,13 +54,13 @@ read_eda_file <- function(file){
 ## -------- reformat editing stat sheet within function ----------------------
 
 read_edit_sheet <- function(file){
-  print(file) 
-  read_xlsx(file, sheet = 3) %>% 
-    gather(-`Segment Number`, 
-           key = "segment", 
-           value = "value") %>% 
-    spread(key = `Segment Number`, 
-           value = value) %>% 
+  print(file)
+  read_xlsx(file, sheet = 3) %>%
+    gather(-`Segment Number`,
+           key = "segment",
+           value = "value") %>%
+    spread(key = `Segment Number`,
+           value = value) %>%
     rename(segment = segment,
            eda_sec_cut = `EDA : Seconds Removed`,
            eda_perc_cut = `EDA : Percentage Removed`,
@@ -70,7 +70,7 @@ read_edit_sheet <- function(file){
            resp_perc_cut = `Resp : Percentage Removed`,
            resp_sec_est = `Resp : Seconds Estimated`,
            resp_perc_est = `Resp : Percentage Estimated`) %>%
-    mutate_all(as.numeric) %>% 
+    mutate_all(as.numeric) %>%
     mutate(file_name = sub(".xlsx", "", basename(file)))
 }
 
@@ -120,15 +120,15 @@ parent_eda_edits <- bind_rows(all_eda_edits)
 ############################## clean up final tbls ###########################
 
 
-## ------ reorder segments, separate file_name, and reorder columns in eda 
+## ------ reorder segments, separate file_name, and reorder columns in eda
 
-parent_eda <- parent_eda %>% 
-  arrange(file_name, segment) %>% 
-  separate(col = file_name, 
+parent_eda <- parent_eda %>%
+  arrange(file_name, segment) %>%
+  separate(col = file_name,
            into = c("family", "individual", "task"),
-           sep = "-") %>% 
-  select(family, individual, 
-         task, segment, 
+           sep = "-") %>%
+  select(family, individual,
+         task, segment,
          seg_length, start_time, end_time,
          tonic_scl, total_scr,
          everything())
@@ -137,14 +137,14 @@ parent_eda <- parent_eda %>%
 
 ## ---------- reorder segments and separate file_name in edit sheets ---------
 
-parent_eda_edits <- parent_eda_edits %>% 
-  arrange(file_name, segment) %>% 
-  separate(col = file_name, 
+parent_eda_edits <- parent_eda_edits %>%
+  arrange(file_name, segment) %>%
+  separate(col = file_name,
            into = c("family", "individual", "task"),
-           sep = "-") %>% 
-  select(family, individual, 
+           sep = "-") %>%
+  select(family, individual,
          task, segment,
-         eda_perc_est, eda_perc_cut, 
+         eda_perc_est, eda_perc_cut,
          everything())
 
 
@@ -155,7 +155,7 @@ parent_eda_edits <- parent_eda_edits %>%
 
 
 eda <- right_join(parent_eda, parent_eda_edits,
-                  by = c("family", "individual", "task", "segment")) %>% 
+                  by = c("family", "individual", "task", "segment")) %>%
   mutate_all(as.numeric)
 
 
@@ -163,10 +163,10 @@ eda <- right_join(parent_eda, parent_eda_edits,
 ######################### ADD VARIABLES PER TASK ###########################
 
 
-eda <- eda %>% 
-  group_by(family, individual, task) %>% 
-  mutate(scl_mean_task = mean(tonic_scl)) %>% 
-  select(family, individual, task, segment, 
+eda <- eda %>%
+  group_by(family, individual, task) %>%
+  mutate(scl_mean_task = mean(tonic_scl)) %>%
+  select(family, individual, task, segment,
          tonic_scl, scl_mean_task,
          total_scr,
          everything())
