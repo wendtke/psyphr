@@ -1,12 +1,20 @@
 Package: psyphyr
-Title: Wrangling Psychophysiological Data 
-Version: 0.0.0.9000
+Title: wrangling psychophysiological data 
+Version: 0.1.0
 Authors@R: 
-    person(given = "Kathleen E",
+    c(person(given = "Kathleen E",
            family = "Wendt",
            role = c("aut", "cre"),
            email = "wendtke@colostate.edu")
-Description: Wrangle psychophysiological data from MindWare Technologies.
+    person(given = "Amanda")
+Description: an R package to wrangle psychophysiological data from 
+MindWare Technologies.
+Authors@R: c(person("Kathleen E", "Wendt", email = "wendtke@colostate.edu",
+                  role = c("aut", "cre")),
+            person("Amanda", "Gadrow", email = "amanda@rstudio.com",
+                  role = "aut")),
+            person("Audrey", "McCombs", email = "amccombs@iastate.edu", 
+                  role = "aut")
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -19,7 +27,4 @@ Suggests:
 Imports: 
     dplyr,
     tidyr,
-    readxl,
-    writexl,
-    lubridate,
-    assertive
+    readxl
