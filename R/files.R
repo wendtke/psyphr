@@ -1,8 +1,5 @@
 library("readxl")
 
-path_name <- "tests/testthat/test_data/eda"
-extension <- ".xlsx"
-
 workbook_sheets <- function(pathname, extension){
 
   # Find files in directory
@@ -39,26 +36,3 @@ workbook_sheets <- function(pathname, extension){
   list_of_wkbk_sheets
 
 }
-
-sheets <- workbook_sheets(pathname = path_name, extension = extension)
-
-
-#####  Subsetting the list
-
-  # To grab df's with sheets named "HRV_Stats"
-my_sheets <- grep(pattern = "EDA_Stats$", x = names(sheets))
-
-for(i in my_sheets){
-  assign(names(sheets)[i], sheets[[i]])
-}
-
-
-  # To grab df's with files named "01-1-1"
-my_sheets <- grep(pattern = "^01-1-1", x = names(sheets))
-
-for(i in my_sheets){
-  assign(names(sheets)[i], sheets[[i]])
-}
-
-
-

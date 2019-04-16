@@ -1,9 +1,4 @@
-path_name <- "tests/testthat/test_data/eda"
-extension <- ".xlsx"
-
-list_of_sheets <- workbook_sheets(path_name, extension)
-
-file_name <- "01-1-1"
+#See example for how this works
 
 subset_for_files <- function(list_of_sheets, file_name){
   my_dfs <- grep(pattern = file_name, x = names(list_of_sheets))
@@ -13,6 +8,3 @@ subset_for_files <- function(list_of_sheets, file_name){
   }
 
 }
-
-subset_for_files(list_of_sheets, file_name)
-

@@ -1,9 +1,4 @@
-path_name <- "tests/testthat/test_data/eda"
-extension <- ".xlsx"
-
-list_of_sheets <- workbook_sheets(path_name, extension)
-
-sheet_name <- "EDA_Stats"
+#See example for how this works
 
 subset_for_sheets <- function(list_of_sheets, sheet_name){
   my_dfs <- grep(pattern = sheet_name, x = names(list_of_sheets))
@@ -13,5 +8,3 @@ subset_for_sheets <- function(list_of_sheets, sheet_name){
   }
 
 }
-
-subset_for_sheets(list_of_sheets, sheet_name)
