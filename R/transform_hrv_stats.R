@@ -16,13 +16,13 @@
 transform_hrv_sheet <- function(file_name, sheet){
   sheet <- sheet %>%
     tidyr::gather(-`Segment Number`,
-           key = "segment",
-           value = "value") %>%
+                  key = "segment",
+                  value = "value") %>%
     tidyr::spread(key = `Segment Number`,
-           value = value) %>%
+                  value = value) %>%
     dplyr::mutate_all(as.numeric) %>%
     dplyr::mutate(file_name = file_name)
 
   sheet
 
-  }
+}
