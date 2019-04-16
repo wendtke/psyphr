@@ -7,8 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "wendtke@colostate.edu")
     person(given = "Amanda")
-Description: an R package to wrangle psychophysiological data from 
-MindWare Technologies.
+Description: an R package to wrangle psychophysiological data from MindWare Technologies.
 Authors@R: c(person("Kathleen E", "Wendt", email = "wendtke@colostate.edu",
                   role = c("aut", "cre")),
             person("Amanda", "Gadrow", email = "amanda@rstudio.com",
