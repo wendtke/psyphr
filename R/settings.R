@@ -15,8 +15,9 @@
 #'
 #'
 transform_settings_sheet <- function(file_name, sheet){
+  colnames(sheet) <- c("Setting", "Value")
   sheet <- sheet %>%
-    tidyr::gather(key = "setting",
-                  value = "value") %>%
+    tidyr::spread(key = "Setting",
+                  value = "Value") %>%
     dplyr::mutate(file_name = file_name)
 }
