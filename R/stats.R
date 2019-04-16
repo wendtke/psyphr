@@ -1,8 +1,9 @@
-#' Process "HRV Stats" sheet
+#' Process "* Stats" sheet
 #'
-#' The transform_hrv_sheet function transforms the raw HRV Stats sheet to
-#' use the Segment Names as column names, make all values numeric, and add the
-#' name of the file as a column, so the data includes the source designation.
+#' The transform_stats_sheet function transforms the raw HRV or EDA Stats sheet
+#' (sheet #1) to use the Segment Names as column names, make all values numeric,
+#' and add the name of the file as a column, so the data includes the
+#' source designation.
 #'
 #' @param file_name
 #' @param sheet
@@ -11,9 +12,9 @@
 #' @export
 #'
 #' @examples
-#' transform_hrv_sheet(name_of_file, sheet_data)
+#' transform_stats_sheet(name_of_file, sheet_data)
 #'
-transform_hrv_sheet <- function(file_name, sheet){
+transform_stats_sheet <- function(file_name, sheet){
   sheet <- sheet %>%
     tidyr::gather(-`Segment Number`,
                   key = "segment",
