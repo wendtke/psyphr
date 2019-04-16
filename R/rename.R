@@ -21,7 +21,7 @@
 #'
 #'
 #'
-#'
+
 rename_hrv_editing_columns <- function(sheet) {
     sheet <- sheet %>%
     dplyr::rename(segment = segment,
