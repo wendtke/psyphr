@@ -1,12 +1,12 @@
 Package: psyr
-Title: What the Package Does (One Line, Title Case)
+Title: Wrangling Psychophysiological Data 
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Kathleen E",
            family = "Wendt",
            role = c("aut", "cre"),
            email = "wendtke@colostate.edu")
-Description: What the package does (one paragraph).
+Description: Wrangle psychophysiological data from MindWare Technologies.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
