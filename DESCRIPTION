@@ -13,8 +13,8 @@ Authors@R: c(person("Kathleen E", "Wendt", email = "wendtke@colostate.edu",
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/wendtke/psyr
-BugReports: https://github.com/wendtke/psyr/issues
+URL: https://github.com/wendtke/psyphr
+BugReports: https://github.com/wendtke/psyphr/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Suggests: 
