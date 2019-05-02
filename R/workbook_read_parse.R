@@ -1,0 +1,88 @@
+#' Read a MindWare Workbook in Excel format
+#'
+#' @param path
+#' @param device_vendor
+#'
+#' @return
+#' @export
+#'
+#' @examples
+read_workbook <- function(path, device_vendor = NULL){
+  # Check if file type is Excel
+  `if`(is.na(readxl::excel_format(path)), stop("The input is not an Excel file"))
+
+  sheet_names <- excel_sheets(path)
+
+  # Read each sheet from workbook
+  suppressMessages({
+  workbook <- map(sheet_names,
+                  ~ read_excel(path = path,
+                               sheet = .,
+                               na = c("", "N/A"),
+                               col_names = FALSE,
+                               col_types = "text")
+  ) %>% set_names(sheet_names)
+  })
+
+  structure(
+    workbook,
+    class = c("psyphr_wb", class(workbook)),
+    device_vendor = device_vendor,
+    origin_path = path,
+    origin_mtime = file.mtime(path)
+    )
+}
+
+
+
+#' Parsing and tidying a Mindware EDA workbook
+#'
+#' @param workbook
+#'
+#' @return
+#' @export
+#'
+#' @examples
+tidy_EDA <- function(workbook){
+  # EDA Stats
+  workbook[[1]] <- workbook[[1]] %>% transpose_convert_colnames()
+
+  # SCR Stats
+  workbook[[2]] <- workbook[[2]] %>%
+    first_row_to_colnames()
+
+  # Editing Stats
+  workbook[[3]] <- workbook[[3]] %>% transpose_convert_colnames()
+
+  # Settings
+  workbook[[4]] <- workbook[[4]] %>% df_to_vector()
+
+  return(workbook)
+}
+
+
+#' Turn a data frame into vector
+#'
+#' Use a data frame's first column to a vectors's names, the second column to its values.
+#'
+#' @param .data
+#'
+#' @return
+#'
+df_to_vector <- function(.data){
+  res <- .data[[2]]
+  names(res) <- .data[[1]]
+  res
+}
+
+transpose_convert_colnames <- function(.data) {
+  .data %>%
+    t() %>%
+    first_row_to_colnames() %>%
+    as_tibble()
+}
+
+first_row_to_colnames <- function(.data){
+  colnames(.data) <- .data[1,]
+  .data[-1,]
+}
