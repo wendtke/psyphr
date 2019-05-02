@@ -88,3 +88,16 @@ first_row_to_colnames <- function(.data){
   colnames(.data) <- .data[1,]
   .data[-1,]
 }
+
+
+#' Bare Name of a File, w.o. Path or Extension
+#'
+#' @param path
+#'
+#' @return string
+#' @export
+#'
+#' @examples
+bare_name <- function(path){
+  gsub("(\\.+)(?!.*\\1).*$", "", basename(path), perl = TRUE)
+}
