@@ -23,6 +23,7 @@ Suggests:
 Imports: 
     dplyr,
     tidyr,
-    readxl
+    readxl,
+    purrr
 Depends:
     magrittr
