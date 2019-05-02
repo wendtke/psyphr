@@ -6,22 +6,24 @@
 #' @return
 #' @export
 #'
+#'
 #' @examples
 read_workbook <- function(path, device_vendor = NULL){
   # Check if file type is Excel
   `if`(is.na(readxl::excel_format(path)), stop("The input is not an Excel file"))
 
-  sheet_names <- excel_sheets(path)
+  sheet_names <- readxl::excel_sheets(path)
 
   # Read each sheet from workbook
   suppressMessages({
-  workbook <- map(sheet_names,
-                  ~ read_excel(path = path,
+  workbook <- purrr::map(sheet_names,
+                  ~ readxl::read_excel(path = path,
                                sheet = .,
                                na = c("", "N/A"),
                                col_names = FALSE,
                                col_types = "text")
-  ) %>% set_names(sheet_names)
+  ) %>% magrittr::set_names(sheet_names)
+
   })
 
   structure(
@@ -79,7 +81,7 @@ transpose_convert_colnames <- function(.data) {
   .data %>%
     t() %>%
     first_row_to_colnames() %>%
-    as_tibble()
+    tibble::as_tibble()
 }
 
 first_row_to_colnames <- function(.data){
