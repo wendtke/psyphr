@@ -8,7 +8,8 @@ Authors@R: c(person("Kathleen E", "Wendt", email = "wendtke@colostate.edu",
                   role = "aut"),
             person("Audrey", "McCombs", email = "amccombs@iastate.edu", 
                   role = "aut"),
-            person("Siqi", "Zhang", email = "iqis.gnahz@gmail.com")                  
+            person("Siqi", "Zhang", email = "iqis.gnahz@gmail.com",
+                  role = "aut")                  
                   )
 License: MIT + file LICENSE
 Encoding: UTF-8
