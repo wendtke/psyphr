@@ -80,33 +80,29 @@ rename_hrv_editing_columns <- function(sheet) {
 
 
 rename_eda_stats_columns <- function(sheet){
-  sheet <- sheet %>%
-    dpylr::rename(segment = segment,
-                  start_time = `Start Time`,
-                  end_time = `End Time`,
-                  seg_length = `Segment Duration`,
-                  total_scr = `Total SCRs`,
-                  er_scr = `ER-SCRs`,
-                  ns_scrs = `NS-SCRs`,
-                  tonic_scl = `Tonic SCL`,
-                  mean_sc = `Mean SC`,
-                  tonic_period = `Tonic Period`)
-
-  sheet
-
+  sheet %>%
+  dplyr::rename(segment = `Segment Number`,
+                start_time = `Start Time`,
+                end_time = `End Time`,
+                seg_length = `Segment Duration`,
+                total_scr = `Total SCRs`,
+                er_scr = `ER-SCRs`,
+                ns_scrs = `NS-SCRs`,
+                tonic_scl = `Tonic SCL`,
+                mean_sc = `Mean SC`,
+                tonic_period = `Tonic Period`)
 }
 
 
-
 rename_eda_editing_columns <- function(sheet){
-  sheet <- sheet %>%
-    dplyr::rename(segment = segment,
-                  eda_sec_cut = `EDA : Seconds Removed`,
-                  eda_perc_cut = `EDA : Percentage Removed`,
-                  eda_sec_est = `EDA : Seconds Estimated`,
-                  eda_perc_est = `EDA : Percentage Estimated`,
-                  resp_sec_cut = `Resp : Seconds Removed`,
-                  resp_perc_cut = `Resp : Percentage Removed`,
-                  resp_sec_est = `Resp : Seconds Estimated`,
-                  resp_perc_est = `Resp : Percentage Estimated`)
+  sheet %>%
+  dplyr::rename(segment = `Segment Number`,
+                eda_sec_cut = `EDA : Seconds Removed`,
+                eda_perc_cut = `EDA : Percentage Removed`,
+                eda_sec_est = `EDA : Seconds Estimated`,
+                eda_perc_est = `EDA : Percentage Estimated`,
+                resp_sec_cut = `Resp : Seconds Removed`,
+                resp_perc_cut = `Resp : Percentage Removed`,
+                resp_sec_est = `Resp : Seconds Estimated`,
+                resp_perc_est = `Resp : Percentage Estimated`)
 }
