@@ -1,3 +1,17 @@
+#' Read a MindWare EDA Workbook
+#'
+#' @param path
+#'
+#' @return
+#' @export
+#'
+#' @examples
+read_MW_EDA <- function(path) {
+  read_MW_workbook(path, device_vendor = "MindWare") %>%
+    tidy_MW_EDA()
+}
+
+
 #' Read a MindWare Workbook in Excel format
 #'
 #' @param path
@@ -8,7 +22,7 @@
 #'
 #'
 #' @examples
-read_workbook <- function(path, device_vendor = NULL){
+read_MW_workbook <- function(path, device_vendor = NULL){
   # Check if file type is Excel
   `if`(is.na(readxl::excel_format(path)), stop("The input is not an Excel file"))
 
@@ -45,7 +59,7 @@ read_workbook <- function(path, device_vendor = NULL){
 #' @export
 #'
 #' @examples
-tidy_EDA <- function(workbook){
+tidy_MW_EDA <- function(workbook){
   # EDA Stats
   workbook[[1]] <- workbook[[1]] %>% transpose_convert_colnames()
 
