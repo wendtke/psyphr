@@ -18,7 +18,20 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of psyphr is to ...
+The `psyphr` R package turns [psychophysilology](https://en.wikipedia.org/wiki/Psychophysiology) lab data from proprietary equipments into a [tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form, wherever approapriate, for downstream analysis.
+
+The package is currently under active development. Currently, only [EDA](https://support.mindwaretech.com/manuals/software/eda/3-2/) and [HRV](https://support.mindwaretech.com/manuals/software/hrv/3-2/) data from MindWare is supported. 
+
+
+## TODO
+
+The development team considers the following for the package's future:
+
+- Customizable data QA utilities, with meaningful defaults
+- Common visualization schemes
+- Study compilation utility
+- Compatibility on data feeds from more vendors' equipments
+
 
 ## Installation
 
@@ -34,27 +47,3 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("wendtke/psyphr")
 ```
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(psyphr)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!

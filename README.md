@@ -9,7 +9,25 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of psyphr is to …
+The `psyphr` R package turns
+[psychophysilology](https://en.wikipedia.org/wiki/Psychophysiology) lab
+data from proprietary equipments into a
+[tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form, wherever
+approapriate, for downstream analysis.
+
+The package is currently under active development. Currently, only
+[EDA](https://support.mindwaretech.com/manuals/software/eda/3-2/) and
+[HRV](https://support.mindwaretech.com/manuals/software/hrv/3-2/) data
+from MindWare is supported.
+
+## TODO
+
+The development team considers the following for the package’s future:
+
+  - Customizable data QA utilities, with meaningful defaults
+  - Common visualization schemes
+  - Study compilation utility
+  - Compatibility on data feeds from more vendors’ equipments
 
 ## Installation
 
@@ -26,37 +44,3 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("wendtke/psyphr")
 ```
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(psyphr)
-#> Loading required package: magrittr
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
