@@ -2,7 +2,7 @@ Package: psyphr
 Title: wrangling psychophysiological data 
 Version: 0.1.0
 Authors@R: 
-    c(person(given = "Kathleen E",
+    c(person(given = "Kathleen Ellen",
            family = "Wendt",
            role = c("aut", "cre"),
            email = "wendtke@colostate.edu")
