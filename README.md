@@ -10,15 +10,18 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The `psyphr` R package turns
-[psychophysilology](https://en.wikipedia.org/wiki/Psychophysiology) lab
-data from proprietary equipments into a
-[tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form, wherever
-approapriate, for downstream analysis.
+[psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology)
+data from proprietary data collection and processing systems into a
+[tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form for downstream
+analysis and visualization.
 
 The package is currently under active development. Currently, only
-[EDA](https://support.mindwaretech.com/manuals/software/eda/3-2/) and
-[HRV](https://support.mindwaretech.com/manuals/software/hrv/3-2/) data
-from MindWare is supported.
+[Electrodermal
+Activity](https://support.mindwaretech.com/manuals/software/eda/3-2/)
+and [Heart Rate
+Variability](https://support.mindwaretech.com/manuals/software/hrv/3-2/)
+output data from [MindWare Technologies](https://www.mindwaretech.com/)
+are supported.
 
 ## TODO
 
@@ -27,7 +30,8 @@ The development team considers the following for the package’s future:
   - Customizable data QA utilities, with meaningful defaults
   - Common visualization schemes
   - Study compilation utility
-  - Compatibility on data feeds from more vendors’ equipments
+  - Compatibility on data feeds from other popular data collection and
+    processing systems (e.g., [BIOPAC](https://www.biopac.com/))
 
 ## Installation
 
