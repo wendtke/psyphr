@@ -1,13 +1,8 @@
 Package: psyphr
 Title: wrangling psychophysiological data 
 Version: 0.1.0
-Authors@R: 
-    c(person(given = "Kathleen E",
-           family = "Wendt",
-           role = c("aut", "cre"),
-           email = "kathleen.wendt@colostate.edu")
 Description: wrangle psychophysiological data from MindWare Technologies.
-Authors@R: c(person("Kathleen E", "Wendt", email = "kathleen.wendt@colostate.edu",
+Authors@R: c(person("Kathleen", "Wendt", email = "kathleen.wendt@colostate.edu",
                   role = c("aut", "cre")),
             person("Amanda", "Gadrow", email = "amanda@rstudio.com",
                   role = "aut"))
