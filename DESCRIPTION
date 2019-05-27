@@ -8,7 +8,7 @@ Authors@R:
            email = "kathleen.wendt@colostate.edu")
 Description: wrangle psychophysiological data from MindWare Technologies.
 Authors@R: c(person("Kathleen E", "Wendt", email = "kathleen.wendt@colostate.edu",
-                  role = c("aut", "cre")).
+                  role = c("aut", "cre")),
             person("Amanda", "Gadrow", email = "amanda@rstudio.com",
                   role = "aut"))
 License: MIT + file LICENSE
