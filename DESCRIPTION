@@ -2,14 +2,12 @@ Package: psyphr
 Title: wrangling psychophysiological data 
 Version: 0.1.0.9000
 Description: an R package to wrangle psychophysiological data from MindWare Technologies.
-Authors@R: c(person("Kathleen E", "Wendt", email = "wendtke@colostate.edu",
+Authors@R: c(person("Kathleen", "Wendt", email = "kathleen.wendt@colostate.edu",
                   role = c("aut", "cre")),
-            person("Amanda", "Gadrow", email = "amanda@rstudio.com",
-                  role = "aut"),
-            person("Audrey", "McCombs", email = "amccombs@iastate.edu", 
-                  role = "aut"),
             person("Siqi", "Zhang", email = "iqis.gnahz@gmail.com",
-                  role = "aut")                  
+                  role = "aut")   
+            person("Amanda", "Gadrow", email = "amanda@rstudio.com",
+                  role = "aut")
                   )
 License: MIT + file LICENSE
 Encoding: UTF-8
