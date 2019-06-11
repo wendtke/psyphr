@@ -1,0 +1,52 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "figures/README-",
+  out.width = "100%"
+)
+```
+# psyphr
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+The `psyphr` R package tranforms [psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology) data from 
+proprietary data collection and processing systems into a [tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form for downstream analysis 
+and visualization.
+
+The package is currently under active development. Currently, only [Electrodermal Activity](https://support.mindwaretech.com/manuals/software/eda/3-2/) and [Heart Rate Variability](https://support.mindwaretech.com/manuals/software/hrv/3-2/) output data from [MindWare Technologies](https://www.mindwaretech.com/) are supported. 
+
+
+## TODO
+
+The development team considers the following for the package's future:
+
+- Submit `psyphr` to [rOpenSci](https://ropensci.org/) for peer review and publication
+- Customizable data QA utilities with meaningful defaults
+- Common, publication-grade visualization schemes
+- Study compilation utility
+- Compatibility on data feeds from other popular data collection and processing systems (e.g., [BIOPAC](https://www.biopac.com/))
+
+
+## Installation
+
+Install the released version of `psyphr` from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("psyphr")
+```
+
+Install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("wendtke/psyphr")
+```
