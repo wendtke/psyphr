@@ -61,17 +61,20 @@ read_MW_workbook <- function(path, device_vendor = NULL){
 #' @examples
 tidy_MW_EDA <- function(workbook){
   # EDA Stats
-  workbook[[1]] <- workbook[[1]] %>% transpose_convert_colnames()
+  workbook[[1]] <- workbook[[1]] %>%
+    transpose_convert_colnames()
 
   # SCR Stats
   workbook[[2]] <- workbook[[2]] %>%
     first_row_to_colnames()
 
   # Editing Stats
-  workbook[[3]] <- workbook[[3]] %>% transpose_convert_colnames()
+  workbook[[3]] <- workbook[[3]] %>%
+    transpose_convert_colnames()
 
   # Settings
-  workbook[[4]] <- workbook[[4]] %>% df_to_vector()
+  workbook[[4]] <- workbook[[4]] %>%
+    df_to_vector()
 
   return(workbook)
 }
