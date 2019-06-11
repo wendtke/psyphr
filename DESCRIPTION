@@ -5,7 +5,7 @@ Description: an R package to wrangle psychophysiological data from MindWare Tech
 Authors@R: c(person("Kathleen", "Wendt", email = "kathleen.wendt@colostate.edu",
                   role = c("aut", "cre")),
             person("Siqi", "Zhang", email = "iqis.gnahz@gmail.com",
-                  role = "aut")   
+                  role = "aut"),  
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
