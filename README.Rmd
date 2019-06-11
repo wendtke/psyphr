@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "figures/README-",
   out.width = "100%"
 )
 ```
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The `psyphr` R package turns [psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology) data from 
+The `psyphr` R package tranforms [psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology) data from 
 proprietary data collection and processing systems into a [tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form for downstream analysis 
 and visualization.
 
@@ -30,8 +30,8 @@ The package is currently under active development. Currently, only [Electroderma
 The development team considers the following for the package's future:
 
 - Submit `psyphr` to [rOpenSci](https://ropensci.org/) for peer review and publication
-- Customizable data QA utilities, with meaningful defaults
-- Common visualization schemes
+- Customizable data QA utilities with meaningful defaults
+- Common, publication-grade visualization schemes
 - Study compilation utility
 - Compatibility on data feeds from other popular data collection and processing systems (e.g., [BIOPAC](https://www.biopac.com/))
 
