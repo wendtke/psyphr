@@ -79,6 +79,49 @@ tidy_MW_EDA <- function(workbook){
   return(workbook)
 }
 
+tidy_MW_HRV <- function(workbook){
+  # HRV Stats
+  workbook[[1]] <- workbook[[1]] %>%
+    transpose_convert_colnames()
+
+  # IBI
+  workbook[[2]] <- workbook[[2]] %>%
+    first_row_to_colnames()
+
+  # Power Band Stats
+  workbook[[3]] <- workbook[[3]] %>%
+    transpose_convert_colnames()
+
+  # Heart Rate Time Series
+  workbook[[4]] <- workbook[[4]] %>%
+    first_row_to_colnames()
+
+  # Heart Period Power Spectrum
+  hr_delta_f <- workbook[[5]][1,2]
+  workbook[[5]] <- workbook[[5]][2:nrow(workbook[[5]]), ] %>%
+    first_row_to_colnames()
+  attributes(workbook[[5]], "HR Delta F") <- hr_delta_f
+
+
+  # Respiration Time Series
+  workbook[[6]] <- workbook[[6]] %>%
+    first_row_to_colnames()
+
+  # Respiration Power Spectrum
+  resp_delta <- workbook[[7]][1,2]
+  workbook[[7]] <- workbook[[7]][2:nrow(workbook[[7]]), ] %>%
+    first_row_to_colnames()
+  attributes(workbook[[7]], "Resp Delta") <- resp_delta
+
+  # Editing Stats
+  workbook[[8]] <- workbook[[8]] %>%
+    transpose_convert_colnames()
+
+  # Settings
+  workbook[[9]] <- workbook[[9]] %>%
+    df_to_vector()
+}
+
 
 #' Turn a data frame into vector
 #'
