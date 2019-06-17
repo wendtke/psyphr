@@ -45,7 +45,7 @@ read_MW_workbook <- function(path, device_vendor = NULL){
 
   structure(
     workbook,
-    class = c("psyphr_wb", class(workbook)),
+    class = c("psyphr_workbook", class(workbook)),
     device_vendor = device_vendor,
     origin_path = path,
     origin_mtime = file.mtime(path)
@@ -92,10 +92,10 @@ tidy_MW_HRV <- function(workbook){
     first_row_to_colnames()
 
   # Heart Period Power Spectrum
-  hr_delta_f <- workbook[[5]][1,2]
+  hr_delta_f <- workbook[[5]][1,1, drop = TRUE]
   workbook[[5]] <- workbook[[5]][2:nrow(workbook[[5]]), ] %>%
     first_row_to_colnames()
-  attributes(workbook[[5]], "HR Delta F") <- hr_delta_f
+  attr(workbook[[5]], "HR Delta F") <- hr_delta_f
 
 
   # Respiration Time Series
@@ -103,10 +103,10 @@ tidy_MW_HRV <- function(workbook){
     first_row_to_colnames()
 
   # Respiration Power Spectrum
-  resp_delta <- workbook[[7]][1,2]
+  resp_delta <- workbook[[7]][1,1, drop = TRUE]
   workbook[[7]] <- workbook[[7]][2:nrow(workbook[[7]]), ] %>%
     first_row_to_colnames()
-  attributes(workbook[[7]], "Resp Delta") <- resp_delta
+  attr(workbook[[7]], "Resp Delta") <- resp_delta
 
   # Editing Stats
   workbook[[8]] <- workbook[[8]] %>%
