@@ -108,12 +108,22 @@ tidy_MW_HRV <- function(workbook){
     first_row_to_colnames()
   attr(workbook[[7]], "Resp Delta") <- resp_delta
 
+
+  # Interval Stats
+    # optional
+  has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
+
+  if (has_interval){
+    workbook[[7 + has_interval]] <- workbook[[7 + has_interval]] %>%
+      first_row_to_colnames()
+  }
+
   # Editing Stats
-  workbook[[8]] <- workbook[[8]] %>%
+  workbook[[8 + has_interval]] <- workbook[[8 + has_interval]] %>%
     transpose_convert_colnames()
 
   # Settings
-  workbook[[9]] <- workbook[[9]] %>%
+  workbook[[9 + has_interval]] <- workbook[[9 + has_interval]] %>%
     df_to_vector()
 
   return(workbook)
