@@ -1,4 +1,4 @@
 library(testthat)
-library(psyr)
+library(psyphr)
 
-test_check("psyr")
+test_check("psyphr")
