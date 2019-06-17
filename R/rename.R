@@ -1,12 +1,13 @@
 #' Rename sheet columns after the sheet has been transformed.
 #'
-#' Functions to change the column names to be easier to use by later analysis scripts.
+#' Functions to change the column names to be easier to use by later analysis
+#' scripts.
 #' They should only be called after transform_* has already been used.
 #'
-#' TODO: add error handling in case this is run before transform_* has been run,
-#' and the column names are not as expected. I.e., detect whether the second
-#' column name is a number, and if so,
-#' exit out gracefully with a message to run transform_* function first.
+#' TODO: Add error handling in case this is run before transform_* has been run,
+#' and the column names are not as expected - i.e., detect whether the second
+#' column name is a number, and if so, exit out gracefully with a message
+#' to run transform_* function first.
 #'
 #' @param sheet
 #'
@@ -21,7 +22,7 @@
 #'
 rename_hrv_stats_columns <- function(sheet){
   sheet %>%
-  dplyr::rename(segment = `Segment Numbe`,
+  dplyr::rename(segment = `Segment Number`,
                 start_time = `Start Time`,
                 end_time = `End Time`,
                 seg_length = `Segment Duration`,
