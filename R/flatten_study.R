@@ -20,4 +20,3 @@ flatten_study <- function(origin, dest, delim = "_"){
 }
 
 
-flatten_study("~/Desktop/study", "~/Desktop/study_flat")
