@@ -1,14 +1,21 @@
 #' Read a MindWare Workbook
 #'
+#' @name read_MW
+#' @rdname read_MW
 #' @param path
 #'
 #' @return a list of Mindware data sheets
+NULL
+
+#' @rdname read_MW
 #' @export
 read_MW_EDA <- function(path) {
   read_MW_workbook(path, device_vendor = "MindWare") %>%
     tidy_MW_EDA()
 }
 
+#' @rdname read_MW_EDA
+#' @export
 read_MW_HRV <- function(path){
   read_MW_workbook(path, device_vendor = "MindWare") %>%
     tidy_MW_HRV()
