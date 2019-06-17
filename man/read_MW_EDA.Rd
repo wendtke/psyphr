@@ -2,13 +2,16 @@
 % Please edit documentation in R/workbook_read_parse.R
 \name{read_MW_EDA}
 \alias{read_MW_EDA}
-\title{Read a MindWare EDA Workbook}
+\title{Read a MindWare Workbook}
 \usage{
 read_MW_EDA(path)
 }
 \arguments{
 \item{path}{}
 }
+\value{
+a list of Mindware data sheets
+}
 \description{
-Read a MindWare EDA Workbook
+Read a MindWare Workbook
 }

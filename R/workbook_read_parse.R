@@ -1,27 +1,23 @@
-#' Read a MindWare EDA Workbook
+#' Read a MindWare Workbook
 #'
 #' @param path
 #'
-#' @return
+#' @return a list of Mindware data sheets
 #' @export
-#'
-#' @examples
 read_MW_EDA <- function(path) {
   read_MW_workbook(path, device_vendor = "MindWare") %>%
     tidy_MW_EDA()
 }
 
+read_MW_HRV <- function(path){
+  read_MW_workbook(path, device_vendor = "MindWare") %>%
+    tidy_MW_HRV()
+}
 
-#' Read a MindWare Workbook in Excel format
-#'
-#' @param path
-#' @param device_vendor
-#'
-#' @return
-#' @export
-#'
-#'
-#' @examples
+
+#### Internal ####
+
+# Read a MindWare Workbook in Excel format
 read_MW_workbook <- function(path, device_vendor = NULL){
   # Check if file type is Excel
   `if`(is.na(readxl::excel_format(path)), stop("The input is not an Excel file"))
@@ -50,15 +46,7 @@ read_MW_workbook <- function(path, device_vendor = NULL){
 }
 
 
-
-#' Parsing and tidying a Mindware EDA workbook
-#'
-#' @param workbook
-#'
-#' @return
-#' @export
-#'
-#' @examples
+# Parsing and tidying a Mindware workbooks
 tidy_MW_EDA <- function(workbook){
   # EDA Stats
   workbook[[1]] <- workbook[[1]] %>%
@@ -120,17 +108,16 @@ tidy_MW_HRV <- function(workbook){
   # Settings
   workbook[[9]] <- workbook[[9]] %>%
     df_to_vector()
+
+  return(workbook)
 }
 
 
-#' Turn a data frame into vector
-#'
-#' Use a data frame's first column to a vectors's names, the second column to its values.
-#'
-#' @param .data
-#'
-#' @return
-#'
+
+#### Parsing Helpers ####
+
+# Turn a data frame into vector
+# Data frame's first column as vectors' names, the second column as values
 df_to_vector <- function(.data){
   res <- .data[[2]]
   names(res) <- .data[[1]]
@@ -150,14 +137,7 @@ first_row_to_colnames <- function(.data){
 }
 
 
-#' Bare Name of a File, w.o. Path or Extension
-#'
-#' @param path
-#'
-#' @return string
-#' @export
-#'
-#' @examples
+# Bare Name of a File, w.o. Path or Extension
 bare_name <- function(path){
   gsub("(\\.+)(?!.*\\1).*$", "", basename(path), perl = TRUE)
 }
