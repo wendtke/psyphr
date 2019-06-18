@@ -159,6 +159,26 @@ tidy_MW_EMG <- function(workbook){
   return(workbook)
 }
 
+tidy_MW_IMP <- function(workbook){
+  # Impedance Stats
+  workbook[[1]] <- workbook[[1]] %>%
+    transpose_convert_colnames()
+
+  # IBI
+  workbook[[2]] <- workbook[[2]] %>%
+    first_row_to_colnames()
+
+  # Editing Stats
+  workbook[[3]] <- workbook[[3]] %>%
+    transpose_convert_colnames()
+
+  # Settings
+  workbook[[4]] <- workbook[[4]] %>%
+    df_to_vector()
+
+  return(workbook)
+}
+
 #### Parsing Helpers ####
 
 # Turn a data frame into vector
