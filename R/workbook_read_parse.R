@@ -14,13 +14,33 @@ read_MW_EDA <- function(path) {
     tidy_MW_EDA()
 }
 
-#' @rdname read_MW_EDA
+#' @rdname read_MW
 #' @export
 read_MW_HRV <- function(path){
   read_MW_workbook(path, device_vendor = "MindWare") %>%
     tidy_MW_HRV()
 }
 
+#' @rdname read_MW
+#' @export
+read_MW_EMG <- function(path){
+  read_MW_workbook(path, device_vendor = "MindWare") %>%
+    tidy_MW_EMG()
+}
+
+#' @rdname read_MW
+#' @export
+read_MW_IMP <- function(path){
+  read_MW_workbook(path, device_vendor = "MindWare") %>%
+    tidy_MW_IMP()
+}
+
+#' @rdname read_MW
+#' @export
+read_MW_BPV <- function(path){
+  read_MW_workbook(path, device_vendor = "MindWare") %>%
+    tidy_MW_BPV()
+}
 
 #### Internal ####
 
