@@ -150,7 +150,7 @@ transpose_convert_colnames <- function(.data) {
 
 first_row_to_colnames <- function(.data){
   colnames(.data) <- .data[1,]
-  .data[-1,,drop = FALSE]
+  .data[-1, drop = FALSE]
 }
 
 
