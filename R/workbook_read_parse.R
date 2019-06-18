@@ -129,7 +129,35 @@ tidy_MW_HRV <- function(workbook){
   return(workbook)
 }
 
+tidy_MW_EMG <- function(workbook){
 
+  # EMG Stats
+  workbook[[1]] <- workbook[[1]] %>%
+    transpose_convert_colnames()
+
+  # Channel Stats
+  workbook[[2]] <- workbook[[2]] %>%
+    first_row_to_colnames()
+
+  # Interval Stats
+  # optional
+  has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
+
+  if (has_interval){
+    workbook[[2 + has_interval]] <- workbook[[2 + has_interval]] %>%
+      first_row_to_colnames()
+  }
+
+  # Editing Stats
+  workbook[[3 + has_interval]] <- workbook[[3 + has_interval]] %>%
+    transpose_convert_colnames()
+
+  # Settings
+  workbook[[4 + has_interval]] <- workbook[[4 + has_interval]] %>%
+    df_to_vector()
+
+  return(workbook)
+}
 
 #### Parsing Helpers ####
 
