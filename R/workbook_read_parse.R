@@ -108,7 +108,6 @@ tidy_MW_HRV <- function(workbook){
     first_row_to_colnames()
   attr(workbook[[7]], "Resp Delta") <- resp_delta
 
-
   # Interval Stats
     # optional
   has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
@@ -174,6 +173,60 @@ tidy_MW_IMP <- function(workbook){
 
   # Settings
   workbook[[4]] <- workbook[[4]] %>%
+    df_to_vector()
+
+  return(workbook)
+}
+
+tidy_MW_BPV <- function(workbook){
+
+  # BPV Stats
+  workbook[[1]] <- workbook[[1]] %>%
+    transpose_convert_colnames()
+
+  # IBI
+  workbook[[2]] <- workbook[[2]] %>%
+    first_row_to_colnames()
+
+  # Systolic Amplitudes
+  workbook[[3]] <- workbook[[3]] %>%
+    first_row_to_colnames()
+
+  # Diastolic Amplitudes
+  workbook[[4]] <- workbook[[4]] %>%
+    first_row_to_colnames()
+
+  # MAP
+  workbook[[5]] <- workbook[[5]] %>%
+    first_row_to_colnames()
+
+  # HR Power Band Stats
+  workbook[[6]] <- workbook[[6]] %>%
+    transpose_convert_colnames()
+
+  # BP Power Band Stats
+  workbook[[7]] <- workbook[[7]] %>%
+    transpose_convert_colnames()
+
+  # BRS Stats
+  workbook[[8]] <- workbook[[8]] %>%
+    first_row_to_colnames()
+
+  # Interval Stats
+  # optional
+  has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
+
+  if (has_interval){
+    workbook[[8 + has_interval]] <- workbook[[8 + has_interval]] %>%
+      first_row_to_colnames()
+  }
+
+  # Editing Stats
+  workbook[[9 + has_interval]] <- workbook[[9 + has_interval]] %>%
+    transpose_convert_colnames()
+
+  # Settings
+  workbook[[10 + has_interval]] <- workbook[[10 + has_interval]] %>%
     df_to_vector()
 
   return(workbook)
