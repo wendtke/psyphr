@@ -30,6 +30,13 @@ read_MW_EMG <- function(path){
 
 #' @rdname read_MW
 #' @export
+read_MW_Startle_EMG <- function(path){
+  read_MW_workbook(path, device_vendor = "MindWare") %>%
+    tidy_MW_Startle_EMG()
+}
+
+#' @rdname read_MW
+#' @export
 read_MW_IMP <- function(path){
   read_MW_workbook(path, device_vendor = "MindWare") %>%
     tidy_MW_IMP()
