@@ -187,7 +187,7 @@ tidy_MW_EMG <- function(workbook){
   return(workbook)
 }
 
-tidy_MW_Startle_EMG <- fucntion(workbook){
+tidy_MW_Startle_EMG <- function(workbook){
 
   # Left eye - Trials
   workbook[[1]] <- workbook[[1]] %>%
@@ -214,7 +214,7 @@ tidy_MW_Startle_EMG <- fucntion(workbook){
     first_row_to_colnames()
 
   # Settings
-  workbook[[9 + has_interval]] <- workbook[[9 + has_interval]] %>%
+  workbook[[7]] <- workbook[[7]] %>%
     df_to_vector()
 
   return(workbook)
