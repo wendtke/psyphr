@@ -180,6 +180,39 @@ tidy_MW_EMG <- function(workbook){
   return(workbook)
 }
 
+tidy_MW_Startle_EMG <- fucntion(workbook){
+
+  # Left eye - Trials
+  workbook[[1]] <- workbook[[1]] %>%
+    first_row_to_colnames()
+
+  # Left eye - Conditions
+  workbook[[2]] <- workbook[[2]] %>%
+    first_row_to_colnames()
+
+  # Left ear - Trials
+  workbook[[3]] <- workbook[[3]] %>%
+    first_row_to_colnames()
+
+  # Left ear - Conditions
+  workbook[[4]] <- workbook[[4]] %>%
+    first_row_to_colnames()
+
+  # Right ear - Trials
+  workbook[[5]] <- workbook[[5]] %>%
+    first_row_to_colnames()
+
+  # Right ear - Conditions
+  workbook[[6]] <- workbook[[6]] %>%
+    first_row_to_colnames()
+
+  # Settings
+  workbook[[9 + has_interval]] <- workbook[[9 + has_interval]] %>%
+    df_to_vector()
+
+  return(workbook)
+}
+
 tidy_MW_IMP <- function(workbook){
   # Impedance Stats
   workbook[[1]] <- workbook[[1]] %>%
