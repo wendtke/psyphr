@@ -26,7 +26,7 @@ read_MW_BPV(path)
 \item{path}{file path to workbook}
 }
 \value{
-a list of MindWare data sheets
+a list of data frames, as a S3 object
 }
 \description{
 Read a MindWare Workbook
