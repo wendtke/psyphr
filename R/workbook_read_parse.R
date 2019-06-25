@@ -84,7 +84,7 @@ read_MW_workbook <- function(path){
 }
 
 
-# Parsing and tidying a Mindware workbooks
+# Tidy Mindware workbooks
 tidy_MW_EDA <- function(workbook){
   # EDA Stats
   workbook[[1]] <- workbook[[1]] %>%
@@ -297,8 +297,7 @@ tidy_MW_BPV <- function(workbook){
 }
 
 
-
-#### Parsing Helpers ####
+#### Helpers ####
 
 # Turn a data frame into vector
 # Data frame's first column as vectors' names, the second column as values
