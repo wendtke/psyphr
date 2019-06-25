@@ -23,10 +23,10 @@ read_MW_IMP(path)
 read_MW_BPV(path)
 }
 \arguments{
-\item{path}{}
+\item{path}{file path to workbook}
 }
 \value{
-a list of Mindware data sheets
+a list of MindWare data sheets
 }
 \description{
 Read a MindWare Workbook
