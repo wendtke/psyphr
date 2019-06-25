@@ -7,7 +7,11 @@
 flatten_study(origin, dest, delim = "_")
 }
 \arguments{
-\item{delim}{}
+\item{origin}{origin path}
+
+\item{dest}{destination path}
+
+\item{delim}{file name delimiter}
 }
 \description{
 Flatten a Study with a Recursive File Structure

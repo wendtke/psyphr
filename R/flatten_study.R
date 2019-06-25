@@ -1,8 +1,8 @@
 #' Flatten a Study with a Recursive File Structure
 #'
-#' @param origin
-#' @param dest
-#' @param delim
+#' @param origin origin path
+#' @param dest destination path
+#' @param delim file name delimiter
 #'
 #' @export
 flatten_study <- function(origin, dest, delim = "_"){
