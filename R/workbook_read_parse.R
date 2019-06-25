@@ -4,7 +4,7 @@
 #' @rdname read_MW
 #' @param path file path to workbook
 #'
-#' @return a list of MindWare data sheets
+#' @return a list of data frames, as a S3 object
 #'
 #' @import magrittr
 NULL
