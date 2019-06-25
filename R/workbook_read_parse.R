@@ -5,6 +5,8 @@
 #' @param path file path to workbook
 #'
 #' @return a list of MindWare data sheets
+#'
+#' @import magrittr
 NULL
 
 #' @rdname read_MW
