@@ -2,9 +2,9 @@
 #'
 #' @name read_MW
 #' @rdname read_MW
-#' @param path
+#' @param path file path to workbook
 #'
-#' @return a list of Mindware data sheets
+#' @return a list of MindWare data sheets
 NULL
 
 #' @rdname read_MW
@@ -305,6 +305,7 @@ df_to_vector <- function(.data){
   names(res) <- .data[[1]]
   res
 }
+
 
 transpose_convert_colnames <- function(.data) {
   .data %>%
