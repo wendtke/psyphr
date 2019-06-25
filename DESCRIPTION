@@ -17,6 +17,7 @@ Suggests:
     testthat
 Imports: 
     dplyr,
+    tibble,
     tidyr,
     readxl,
     purrr,
