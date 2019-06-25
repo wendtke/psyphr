@@ -19,6 +19,5 @@ Imports:
     dplyr,
     tidyr,
     readxl,
-    purrr
-Depends:
+    purrr,
     magrittr
