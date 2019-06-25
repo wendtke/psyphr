@@ -12,42 +12,42 @@ NULL
 #' @rdname read_MW
 #' @export
 read_MW_EDA <- function(path) {
-  read_MW_workbook(path, device_vendor = "MindWare") %>%
+  read_MW_workbook(path) %>%
     tidy_MW_EDA()
 }
 
 #' @rdname read_MW
 #' @export
 read_MW_HRV <- function(path){
-  read_MW_workbook(path, device_vendor = "MindWare") %>%
+  read_MW_workbook(path) %>%
     tidy_MW_HRV()
 }
 
 #' @rdname read_MW
 #' @export
 read_MW_EMG <- function(path){
-  read_MW_workbook(path, device_vendor = "MindWare") %>%
+  read_MW_workbook(path) %>%
     tidy_MW_EMG()
 }
 
 #' @rdname read_MW
 #' @export
 read_MW_Startle_EMG <- function(path){
-  read_MW_workbook(path, device_vendor = "MindWare") %>%
+  read_MW_workbook(path) %>%
     tidy_MW_Startle_EMG()
 }
 
 #' @rdname read_MW
 #' @export
 read_MW_IMP <- function(path){
-  read_MW_workbook(path, device_vendor = "MindWare") %>%
+  read_MW_workbook(path) %>%
     tidy_MW_IMP()
 }
 
 #' @rdname read_MW
 #' @export
 read_MW_BPV <- function(path){
-  read_MW_workbook(path, device_vendor = "MindWare") %>%
+  read_MW_workbook(path) %>%
     tidy_MW_BPV()
 }
 
@@ -56,7 +56,7 @@ read_MW_BPV <- function(path){
 #### Internal ####
 
 # Read a MindWare Workbook in Excel format
-read_MW_workbook <- function(path, device_vendor = NULL){
+read_MW_workbook <- function(path){
   # Check if file type is Excel
   `if`(is.na(readxl::excel_format(path)), stop("The input is not an Excel file"))
 
@@ -77,7 +77,7 @@ read_MW_workbook <- function(path, device_vendor = NULL){
   structure(
     workbook,
     class = c("psyphr_workbook", class(workbook)),
-    device_vendor = device_vendor,
+    device_vendor = "MindWare",
     origin_path = path,
     origin_mtime = file.mtime(path)
     )
