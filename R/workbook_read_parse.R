@@ -296,6 +296,37 @@ tidy_MW_BPV <- function(workbook){
   return(workbook)
 }
 
+# Cast MindWare workbooks
+
+cast_MW_EDA <- function(workbook){
+
+
+}
+
+cast_MW_HRV <- function(workbook){
+
+
+}
+
+cast_MW_EMG <- function(workbook){
+
+
+}
+
+cast_MW_Startle_EMG <- function(workbook){
+
+
+}
+
+cast_MW_IMP <- function(workbook){
+
+
+}
+
+cast_MW_BPV <- function(workbook){
+
+
+}
 
 #### Helpers ####
 
