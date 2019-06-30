@@ -36,7 +36,6 @@ Currently, the package supports data outputs from the the following correspondin
 - [Basic Signal Analysis (BSA)](https://support.mindwaretech.com/manuals/software/bsa/3-2/)
 
 
-
 ## Installation
 
 Install the development version from [GitHub](https://github.com/) with:
@@ -45,8 +44,27 @@ Install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("wendtke/psyphr")
 ```
+## Usage
+
+Load and attach `psyphr`.
+
+```{r eval = FALSE}
+require(psyphr)
+```
+
+
+### Read a Single File
+
+### Compile a Study
+
+#### Directory Structure
+
+### Exploratory Analysis
+
+
 
 ## TODO
+
 
 The development team considers the following for the package's future:
 

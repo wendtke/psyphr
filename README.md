@@ -17,12 +17,13 @@ data from commercial data collection and processing systems into a
 [tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form for downstream
 analysis and visualization.
 
-\#\#\#WIP
+### WIP
 
 The package is currently under active development.
 
-Currently, the package supports the following data formats from
-[MindWare Technologies](https://www.mindwaretech.com/) in version 3.2:
+Currently, the package supports data outputs from the the following
+corresponding [MindWare Technologies](https://www.mindwaretech.com/)
+applications in version 3.2:
 
   - [Electrodermal Activity
     (EDA)](https://support.mindwaretech.com/manuals/software/eda/3-2/)
@@ -37,6 +38,31 @@ Currently, the package supports the following data formats from
   - [Basic Signal Analysis
     (BSA)](https://support.mindwaretech.com/manuals/software/bsa/3-2/)
 
+## Installation
+
+Install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("wendtke/psyphr")
+```
+
+## Usage
+
+Load and attach `psyphr`.
+
+``` r
+require(psyphr)
+```
+
+### Read a Single File
+
+### Compile a Study
+
+#### Directory Structure
+
+### Exploratory Analysis
+
 ## TODO
 
 The development team considers the following for the package’s future:
@@ -48,12 +74,3 @@ The development team considers the following for the package’s future:
   - Study compilation utility
   - Compatibility on data feeds from other popular data collection and
     processing systems (e.g., [BIOPAC](https://www.biopac.com/))
-
-## Installation
-
-Install the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("wendtke/psyphr")
-```
