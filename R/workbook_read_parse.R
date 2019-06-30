@@ -111,7 +111,7 @@ tidy_MW_BPV <- function(workbook){
 
   # Settings
   workbook[[10 + has_interval]] <- workbook[[10 + has_interval]] %>%
-    df_to_vector()
+    transpose_convert_colnames()
 
   attr(workbook, "format") <- "BPV"
 
@@ -133,7 +133,7 @@ tidy_MW_EDA <- function(workbook){
 
   # Settings
   workbook[[4]] <- workbook[[4]] %>%
-    df_to_vector()
+    transpose_convert_colnames()
 
   attr(workbook, "format") <- "EDA"
 
@@ -165,7 +165,7 @@ tidy_MW_EMG <- function(workbook){
 
   # Settings
   workbook[[4 + has_interval]] <- workbook[[4 + has_interval]] %>%
-    df_to_vector()
+    transpose_convert_colnames()
 
   attr(workbook, "format") <- "EMG"
 
@@ -221,7 +221,7 @@ tidy_MW_HRV <- function(workbook){
 
   # Settings
   workbook[[9 + has_interval]] <- workbook[[9 + has_interval]] %>%
-    df_to_vector()
+    transpose_convert_colnames()
 
   attr(workbook, "format") <- "HRV"
 
@@ -243,7 +243,7 @@ tidy_MW_IMP <- function(workbook){
 
   # Settings
   workbook[[4]] <- workbook[[4]] %>%
-    df_to_vector()
+    transpose_convert_colnames()
 
   attr(workbook, "format") <- "IMP"
 
@@ -278,7 +278,7 @@ tidy_MW_Startle_EMG <- function(workbook){
 
   # Settings
   workbook[[7]] <- workbook[[7]] %>%
-    df_to_vector()
+    transpose_convert_colnames()
 
   attr(workbook, "format") <- "Startle_EMG"
 
