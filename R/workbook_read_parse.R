@@ -1,56 +1,25 @@
 #' Read a MindWare Workbook
 #'
-#' @name read_MW
-#' @rdname read_MW
 #' @param path file path to workbook
 #'
 #' @return a list of data frames, as a S3 object
-#'
+#' @export
 #' @import magrittr
-NULL
+read_MW <- function(path){
+  workbook <- read_MW_workbook(path)
+  workbook_format <- detect_MW_workbook_format(workbook)
 
-#' @rdname read_MW
-#' @export
-read_MW_EDA <- function(path) {
-  read_MW_workbook(path) %>%
-    tidy_MW_EDA()
+  # some hard logic, LOL
+  f <-
+    if (workbook_format %in% c("BPV", "BPV_Interval")) {tidy_MW_BPV
+    } else if (workbook_format %in% "EDA") {tidy_MW_EDA
+    } else if (workbook_format %in% c("EMG", "EMG_Interval")) {tidy_MW_EMG
+    } else if (workbook_format %in% c("HRV", "HRV_Interval")) {tidy_MW_HRV
+    } else if (workbook_format %in% "IMP") {tidy_MW_IMP
+    } else if (workbook_format %in% "Startle_EMG") {tidy_MW_Startle_EMG
+    } else (stop("Input is not in a known format"))
+  f(workbook)
 }
-
-#' @rdname read_MW
-#' @export
-read_MW_HRV <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_HRV()
-}
-
-#' @rdname read_MW
-#' @export
-read_MW_EMG <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_EMG()
-}
-
-#' @rdname read_MW
-#' @export
-read_MW_Startle_EMG <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_Startle_EMG()
-}
-
-#' @rdname read_MW
-#' @export
-read_MW_IMP <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_IMP()
-}
-
-#' @rdname read_MW
-#' @export
-read_MW_BPV <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_BPV()
-}
-
 
 
 #### Internal ####
@@ -83,8 +52,70 @@ read_MW_workbook <- function(path){
     )
 }
 
+# Detect the workbook format as a string
+detect_MW_workbook_format <- function(workbook){
+  MW_format_profiles <- readRDS("inst/extdata/MW/MW_format_profiles.rds")
+  this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names(),
+                                settings = workbook %>% `[[`("Settings") %>% psyphr:::df_to_vector() %>% names()
+  )
+  names(MW_format_profiles)[map_lgl(MW_format_profiles, ~ identical(.x, this_workbook_profile))]
+}
 
 # Tidy Mindware workbooks
+tidy_MW_BPV <- function(workbook){
+
+  # BPV Stats
+  workbook[[1]] <- workbook[[1]] %>%
+    transpose_convert_colnames()
+
+  # IBI
+  workbook[[2]] <- workbook[[2]] %>%
+    first_row_to_colnames()
+
+  # Systolic Amplitudes
+  workbook[[3]] <- workbook[[3]] %>%
+    first_row_to_colnames()
+
+  # Diastolic Amplitudes
+  workbook[[4]] <- workbook[[4]] %>%
+    first_row_to_colnames()
+
+  # MAP
+  workbook[[5]] <- workbook[[5]] %>%
+    first_row_to_colnames()
+
+  # HR Power Band Stats
+  workbook[[6]] <- workbook[[6]] %>%
+    transpose_convert_colnames()
+
+  # BP Power Band Stats
+  workbook[[7]] <- workbook[[7]] %>%
+    transpose_convert_colnames()
+
+  # BRS Stats
+  workbook[[8]] <- workbook[[8]] %>%
+    first_row_to_colnames()
+
+  # Interval Stats
+  # optional
+  has_interval <- length(workbook) == 11 # if length == 11, has "interval" sheet
+
+  if (has_interval){
+    workbook[[8 + has_interval]] <- workbook[[8 + has_interval]] %>%
+      first_row_to_colnames()
+  }
+
+  # Editing Stats
+  workbook[[9 + has_interval]] <- workbook[[9 + has_interval]] %>%
+    transpose_convert_colnames()
+
+  # Settings
+  workbook[[10 + has_interval]] <- workbook[[10 + has_interval]] %>%
+    df_to_vector()
+
+  return(workbook)
+}
+
 tidy_MW_EDA <- function(workbook){
   # EDA Stats
   workbook[[1]] <- workbook[[1]] %>%
@@ -100,6 +131,36 @@ tidy_MW_EDA <- function(workbook){
 
   # Settings
   workbook[[4]] <- workbook[[4]] %>%
+    df_to_vector()
+
+  return(workbook)
+}
+
+tidy_MW_EMG <- function(workbook){
+
+  # EMG Stats
+  workbook[[1]] <- workbook[[1]] %>%
+    transpose_convert_colnames()
+
+  # Channel Stats
+  workbook[[2]] <- workbook[[2]] %>%
+    first_row_to_colnames()
+
+  # Interval Stats
+  # optional
+  has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
+
+  if (has_interval){
+    workbook[[2 + has_interval]] <- workbook[[2 + has_interval]] %>%
+      first_row_to_colnames()
+  }
+
+  # Editing Stats
+  workbook[[3 + has_interval]] <- workbook[[3 + has_interval]] %>%
+    transpose_convert_colnames()
+
+  # Settings
+  workbook[[4 + has_interval]] <- workbook[[4 + has_interval]] %>%
     df_to_vector()
 
   return(workbook)
@@ -159,31 +220,21 @@ tidy_MW_HRV <- function(workbook){
   return(workbook)
 }
 
-tidy_MW_EMG <- function(workbook){
-
-  # EMG Stats
+tidy_MW_IMP <- function(workbook){
+  # Impedance Stats
   workbook[[1]] <- workbook[[1]] %>%
     transpose_convert_colnames()
 
-  # Channel Stats
+  # IBI
   workbook[[2]] <- workbook[[2]] %>%
     first_row_to_colnames()
 
-  # Interval Stats
-  # optional
-  has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
-
-  if (has_interval){
-    workbook[[2 + has_interval]] <- workbook[[2 + has_interval]] %>%
-      first_row_to_colnames()
-  }
-
   # Editing Stats
-  workbook[[3 + has_interval]] <- workbook[[3 + has_interval]] %>%
+  workbook[[3]] <- workbook[[3]] %>%
     transpose_convert_colnames()
 
   # Settings
-  workbook[[4 + has_interval]] <- workbook[[4 + has_interval]] %>%
+  workbook[[4]] <- workbook[[4]] %>%
     df_to_vector()
 
   return(workbook)
@@ -222,83 +273,6 @@ tidy_MW_Startle_EMG <- function(workbook){
   return(workbook)
 }
 
-tidy_MW_IMP <- function(workbook){
-  # Impedance Stats
-  workbook[[1]] <- workbook[[1]] %>%
-    transpose_convert_colnames()
-
-  # IBI
-  workbook[[2]] <- workbook[[2]] %>%
-    first_row_to_colnames()
-
-  # Editing Stats
-  workbook[[3]] <- workbook[[3]] %>%
-    transpose_convert_colnames()
-
-  # Settings
-  workbook[[4]] <- workbook[[4]] %>%
-    df_to_vector()
-
-  return(workbook)
-}
-
-tidy_MW_BPV <- function(workbook){
-
-  # BPV Stats
-  workbook[[1]] <- workbook[[1]] %>%
-    transpose_convert_colnames()
-
-  # IBI
-  workbook[[2]] <- workbook[[2]] %>%
-    first_row_to_colnames()
-
-  # Systolic Amplitudes
-  workbook[[3]] <- workbook[[3]] %>%
-    first_row_to_colnames()
-
-  # Diastolic Amplitudes
-  workbook[[4]] <- workbook[[4]] %>%
-    first_row_to_colnames()
-
-  # MAP
-  workbook[[5]] <- workbook[[5]] %>%
-    first_row_to_colnames()
-
-  # HR Power Band Stats
-  workbook[[6]] <- workbook[[6]] %>%
-    transpose_convert_colnames()
-
-  # BP Power Band Stats
-  workbook[[7]] <- workbook[[7]] %>%
-    transpose_convert_colnames()
-
-  # BRS Stats
-  workbook[[8]] <- workbook[[8]] %>%
-    first_row_to_colnames()
-
-  # Interval Stats
-  # optional
-  has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
-
-  if (has_interval){
-    workbook[[8 + has_interval]] <- workbook[[8 + has_interval]] %>%
-      first_row_to_colnames()
-  }
-
-  # Editing Stats
-  workbook[[9 + has_interval]] <- workbook[[9 + has_interval]] %>%
-    transpose_convert_colnames()
-
-  # Settings
-  workbook[[10 + has_interval]] <- workbook[[10 + has_interval]] %>%
-    df_to_vector()
-
-  return(workbook)
-}
-
-
-#### Helpers ####
-
 # Turn a data frame into vector
 # Data frame's first column as vectors' names, the second column as values
 df_to_vector <- function(.data){
@@ -306,7 +280,6 @@ df_to_vector <- function(.data){
   names(res) <- .data[[1]]
   res
 }
-
 
 transpose_convert_colnames <- function(.data) {
   .data %>%
@@ -319,7 +292,6 @@ first_row_to_colnames <- function(.data){
   colnames(.data) <- .data[1,]
   .data[-1,,drop = FALSE]
 }
-
 
 # Bare Name of a File, w.o. Path or Extension
 bare_name <- function(path){
