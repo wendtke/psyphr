@@ -24,15 +24,6 @@ read_MW <- function(path){
 
 #### Internal ####
 
-# Detect the workbook format as a string
-detect_MW_workbook_format <- function(workbook){
-  MW_format_profiles <- readRDS("inst/extdata/MW/MW_format_profiles.rds")
-  this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names(),
-                                settings = workbook %>% `[[`("Settings") %>% psyphr:::df_to_vector() %>% names()
-  )
-  names(MW_format_profiles)[map_lgl(MW_format_profiles, ~ identical(.x, this_workbook_profile))]
-}
-
 # Read a MindWare Workbook in Excel format
 read_MW_workbook <- function(path){
   # Check if file type is Excel
@@ -61,6 +52,14 @@ read_MW_workbook <- function(path){
     )
 }
 
+# Detect the workbook format as a string
+detect_MW_workbook_format <- function(workbook){
+  MW_format_profiles <- readRDS("inst/extdata/MW/MW_format_profiles.rds")
+  this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names(),
+                                settings = workbook %>% `[[`("Settings") %>% psyphr:::df_to_vector() %>% names()
+  )
+  names(MW_format_profiles)[map_lgl(MW_format_profiles, ~ identical(.x, this_workbook_profile))]
+}
 
 # Tidy Mindware workbooks
 tidy_MW_BPV <- function(workbook){
@@ -273,40 +272,6 @@ tidy_MW_Startle_EMG <- function(workbook){
 
   return(workbook)
 }
-
-# Cast MindWare workbooks
-
-cast_MW_EDA <- function(workbook){
-
-
-}
-
-cast_MW_HRV <- function(workbook){
-
-
-}
-
-cast_MW_EMG <- function(workbook){
-
-
-}
-
-cast_MW_Startle_EMG <- function(workbook){
-
-
-}
-
-cast_MW_IMP <- function(workbook){
-
-
-}
-
-cast_MW_BPV <- function(workbook){
-
-
-}
-
-#### Helpers ####
 
 # Turn a data frame into vector
 # Data frame's first column as vectors' names, the second column as values
