@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 The `psyphr` R package tranforms [psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology) data from 
 commercial data collection and processing systems into a [tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form for downstream analysis and visualization.
 
-###WIP 
+### WIP 
 
 The package is currently under active development. 
 
@@ -35,15 +35,6 @@ Currently, the package supports data outputs from the the following correspondin
 - [Impedance Cardiography (IMP)](https://support.mindwaretech.com/manuals/software/imp/3-2/)
 - [Basic Signal Analysis (BSA)](https://support.mindwaretech.com/manuals/software/bsa/3-2/)
 
-## TODO
-
-The development team considers the following for the package's future:
-
-- Submit `psyphr` to [rOpenSci](https://ropensci.org/) for peer review and publication
-- Customizable data QA utilities with meaningful defaults
-- Common, publication-grade visualization schemes
-- Study compilation utility
-- Compatibility on data feeds from other popular data collection and processing systems (e.g., [BIOPAC](https://www.biopac.com/))
 
 
 ## Installation
@@ -54,3 +45,13 @@ Install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("wendtke/psyphr")
 ```
+
+## TODO
+
+The development team considers the following for the package's future:
+
+- Submit `psyphr` to [rOpenSci](https://ropensci.org/) for peer review and publication
+- Customizable data QA utilities with meaningful defaults
+- Common, publication-grade visualization schemes
+- Study compilation utility
+- Compatibility on data feeds from other popular data collection and processing systems (e.g., [BIOPAC](https://www.biopac.com/))
