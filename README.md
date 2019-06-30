@@ -7,42 +7,51 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/psyphr)](https://cran.r-project.org/package=psyphr)
 <!-- badges: end -->
 
-The `psyphr` R package turns
+The `psyphr` R package tranforms
 [psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology)
-data from proprietary data collection and processing systems into a
+data from commercial data collection and processing systems into a
 [tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form for downstream
 analysis and visualization.
 
-The package is currently under active development. Currently, only
-[Electrodermal
-Activity](https://support.mindwaretech.com/manuals/software/eda/3-2/)
-and [Heart Rate
-Variability](https://support.mindwaretech.com/manuals/software/hrv/3-2/)
-output data from [MindWare Technologies](https://www.mindwaretech.com/)
-are supported.
+\#\#\#WIP
+
+The package is currently under active development.
+
+Currently, the package supports the following data formats from
+[MindWare Technologies](https://www.mindwaretech.com/) in version 3.2:
+
+  - [Electrodermal Activity
+    (EDA)](https://support.mindwaretech.com/manuals/software/eda/3-2/)
+  - [Heart Rate Variability
+    (HRV)](https://support.mindwaretech.com/manuals/software/hrv/3-2/)
+  - [Electromyography
+    (EMG)](https://support.mindwaretech.com/manuals/software/emg/3-2/)
+  - [Blood Pressure Variability
+    (BPV)](https://support.mindwaretech.com/manuals/software/bpv/3-2/)
+  - [Impedance Cardiography
+    (IMP)](https://support.mindwaretech.com/manuals/software/imp/3-2/)
+  - [Basic Signal Analysis
+    (BSA)](https://support.mindwaretech.com/manuals/software/bsa/3-2/)
 
 ## TODO
 
 The development team considers the following for the package’s future:
 
-  - Customizable data QA utilities, with meaningful defaults
-  - Common visualization schemes
+  - Submit `psyphr` to [rOpenSci](https://ropensci.org/) for peer review
+    and publication
+  - Customizable data QA utilities with meaningful defaults
+  - Common, publication-grade visualization schemes
   - Study compilation utility
   - Compatibility on data feeds from other popular data collection and
     processing systems (e.g., [BIOPAC](https://www.biopac.com/))
 
 ## Installation
 
-You can install the released version of psyphr from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("psyphr")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+Install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
