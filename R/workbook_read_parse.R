@@ -25,10 +25,12 @@ read_MW <- function(path){
 #### Internal ####
 
 # Read a MindWare Workbook in Excel format
+
+#' @import assertthat
 read_MW_workbook <- function(path){
   # Check if file type is Excel
-  `if`(is.na(readxl::excel_format(path)), stop("The input is not an Excel file"))
-
+  # `if`(is.na(readxl::excel_format(path)), stop("The input is not an Excel file"))
+  assert_that(noNA(readxl::excel_format(path)), stop("The input is not an Excel file"))
   sheet_names <- readxl::excel_sheets(path)
 
   # Read each sheet from workbook
