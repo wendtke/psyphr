@@ -22,4 +22,5 @@ Imports:
     readxl,
     purrr,
     magrittr,
-    rlang
+    rlang,
+    assertthat
