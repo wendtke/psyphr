@@ -2,25 +2,9 @@
 % Please edit documentation in R/workbook_read_parse.R
 \name{read_MW}
 \alias{read_MW}
-\alias{read_MW_EDA}
-\alias{read_MW_HRV}
-\alias{read_MW_EMG}
-\alias{read_MW_Startle_EMG}
-\alias{read_MW_IMP}
-\alias{read_MW_BPV}
 \title{Read a MindWare Workbook}
 \usage{
-read_MW_EDA(path)
-
-read_MW_HRV(path)
-
-read_MW_EMG(path)
-
-read_MW_Startle_EMG(path)
-
-read_MW_IMP(path)
-
-read_MW_BPV(path)
+read_MW(path)
 }
 \arguments{
 \item{path}{file path to workbook}

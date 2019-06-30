@@ -1,70 +1,37 @@
 #' Read a MindWare Workbook
 #'
-#' @name read_MW
-#' @rdname read_MW
 #' @param path file path to workbook
 #'
 #' @return a list of data frames, as a S3 object
-#'
+#' @export
 #' @import magrittr
-NULL
+read_MW <- function(path){
+  workbook <- read_MW_workbook(path)
+  workbook_format <- detect_MW_workbook_format(workbook)
 
-# return the workbook format as a string
-detect_MW_workbook_format <- function(workbook){
-  MW_format_profiles <- readRDS("inst/extdata/MW/MW_format_profiles.rds")
-  this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names(),
-                           settings = workbook %>% `[[`("Settings") %>% psyphr:::df_to_vector() %>% names()
-  )
-  names(MW_format_profiles)[map_lgl(MW_format_profiles, ~ identical(.x, this_workbook_profile))]
+  # some hard logic, LOL
+  f <-
+    if (workbook_format %in% c("BPV", "BPV_Interval")) {tidy_MW_BPV
+    } else if (workbook_format %in% "EDA") {tidy_MW_EDA
+    } else if (workbook_format %in% c("EMG", "EMG_Interval")) {tidy_MW_EMG
+    } else if (workbook_format %in% c("HRV", "HRV_Interval")) {tidy_MW_HRV
+    } else if (workbook_format %in% "IMP") {tidy_MW_IMP
+    } else if (workbook_format %in% "Startle_EMG") {tidy_MW_Startle_EMG
+    }
+  f(workbook)
 }
-
-
-
-#' @rdname read_MW
-#' @export
-read_MW_EDA <- function(path) {
-  read_MW_workbook(path) %>%
-    tidy_MW_EDA()
-}
-
-#' @rdname read_MW
-#' @export
-read_MW_HRV <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_HRV()
-}
-
-#' @rdname read_MW
-#' @export
-read_MW_EMG <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_EMG()
-}
-
-#' @rdname read_MW
-#' @export
-read_MW_Startle_EMG <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_Startle_EMG()
-}
-
-#' @rdname read_MW
-#' @export
-read_MW_IMP <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_IMP()
-}
-
-#' @rdname read_MW
-#' @export
-read_MW_BPV <- function(path){
-  read_MW_workbook(path) %>%
-    tidy_MW_BPV()
-}
-
 
 
 #### Internal ####
+
+# Detect the workbook format as a string
+detect_MW_workbook_format <- function(workbook){
+  MW_format_profiles <- readRDS("inst/extdata/MW/MW_format_profiles.rds")
+  this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names(),
+                                settings = workbook %>% `[[`("Settings") %>% psyphr:::df_to_vector() %>% names()
+  )
+  names(MW_format_profiles)[map_lgl(MW_format_profiles, ~ identical(.x, this_workbook_profile))]
+}
 
 # Read a MindWare Workbook in Excel format
 read_MW_workbook <- function(path){
@@ -289,7 +256,7 @@ tidy_MW_BPV <- function(workbook){
 
   # Interval Stats
   # optional
-  has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
+  has_interval <- length(workbook) == 11 # if length == 11, has "interval" sheet
 
   if (has_interval){
     workbook[[8 + has_interval]] <- workbook[[8 + has_interval]] %>%
