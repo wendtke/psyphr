@@ -9,6 +9,17 @@
 #' @import magrittr
 NULL
 
+# return the workbook format as a string
+detect_MW_workbook_format <- function(workbook){
+  MW_format_profiles <- readRDS("inst/extdata/MW/MW_format_profiles.rds")
+  this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names(),
+                           settings = workbook %>% `[[`("Settings") %>% psyphr:::df_to_vector() %>% names()
+  )
+  names(MW_format_profiles)[map_lgl(MW_format_profiles, ~ identical(.x, this_workbook_profile))]
+}
+
+
+
 #' @rdname read_MW
 #' @export
 read_MW_EDA <- function(path) {
