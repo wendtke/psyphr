@@ -43,7 +43,7 @@ lift_meta <- function(study){
 #' @param delim file name delimiter
 #'
 #' @export
-flatten_study <- function(origin, dest, delim = "_"){
+flatten_study_dir <- function(origin, dest, delim = "_"){
   `if`(dir.exists(dest),NULL,dir.create(dest))
 
   origin_file_name <- list.files(origin, recursive = TRUE)
