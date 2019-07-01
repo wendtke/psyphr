@@ -1,6 +1,6 @@
 #' Read a study from a directory
 #'
-#' @param path
+#' @param path path to a study directory
 #'
 #' @return a nested data frame including IDs
 #' @export

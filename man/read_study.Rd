@@ -7,7 +7,7 @@
 read_study(path)
 }
 \arguments{
-\item{path}{}
+\item{path}{path to a study directory}
 }
 \value{
 a nested data frame including IDs
