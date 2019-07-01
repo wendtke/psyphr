@@ -18,7 +18,19 @@ read_MW <- function(path){
     } else if (workbook_format %in% "IMP") {tidy_MW_IMP
     } else if (workbook_format %in% "Startle_EMG") {tidy_MW_Startle_EMG
     } else (stop("Input is not in a known format"))
-  f(workbook)
+
+  workbook <- f(workbook)
+
+  # Preserve attributes, because purrr::map() will discard them
+  # see: https://github.com/tidyverse/purrr/issues/104
+  workbook_attributes <- attributes(workbook)
+
+  # Convert types & Assign back attributes
+    # This is done at last because all previous steps keep data verbatim as "character"
+    # as a precaution to possible errors.
+  workbook <- workbook %>%
+    purrr::map(~ .x %>% readr::type_convert(col_types = cols(col_guess()))) %>%
+    `attributes<-`(workbook_attributes)
 }
 
 
