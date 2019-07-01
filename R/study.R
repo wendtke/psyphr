@@ -1,3 +1,27 @@
+#' Read a study from a directory
+#'
+#' @param path
+#'
+#' @return a nested data frame including IDs
+#' @export
+#'
+#' @examples
+read_study <- function(path){
+
+  file_paths <- list.files(path = path,
+                           pattern = ".xlsx$", full.names = TRUE)
+  file_bare_names <- bare_name(file_paths)
+  file_ids <- stringr::str_split(file_bare_names, pattern = "_")
+
+  workbook_list <- file_paths %>% purrr::map(read_MW)
+
+  study <- file_ids %>% dplyr::bind_cols() %>% t() %>% tibble::as_tibble()
+  study$data <- workbook_list
+}
+
+
+
+
 #' Flatten a Study with a Recursive File Structure
 #'
 #' @param origin origin path

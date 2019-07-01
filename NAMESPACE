@@ -2,4 +2,5 @@
 
 export(flatten_study)
 export(read_MW)
+export(read_study)
 import(magrittr)
