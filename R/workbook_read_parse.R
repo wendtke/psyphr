@@ -98,7 +98,7 @@ tidy_MW_BPV <- function(workbook){
 
   # Interval Stats
   # optional
-  has_interval <- length(workbook) == 11 # if length == 11, has "interval" sheet
+  has_interval <- length(workbook) == 11
 
   if (has_interval){
     workbook[[8 + has_interval]] <- workbook[[8 + has_interval]] %>%
@@ -152,7 +152,7 @@ tidy_MW_EMG <- function(workbook){
 
   # Interval Stats
   # optional
-  has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
+  has_interval <- length(workbook) == 5
 
   if (has_interval){
     workbook[[2 + has_interval]] <- workbook[[2 + has_interval]] %>%
@@ -208,7 +208,7 @@ tidy_MW_HRV <- function(workbook){
 
   # Interval Stats
     # optional
-  has_interval <- length(workbook) == 10 # if length == 10, no "interval" sheet
+  has_interval <- length(workbook) == 10
 
   if (has_interval){
     workbook[[7 + has_interval]] <- workbook[[7 + has_interval]] %>%
