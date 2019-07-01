@@ -11,9 +11,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/psyphr)](https://cran.r-project.org/package=psyphr)
 <!-- badges: end -->
 
-The `psyphr` R package tranforms
-[psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology)
-data from commercial data collection and processing systems into a
+The `psyphr` R package tranforms data from commercial data collection and processing systems for [psychophysiology](https://en.wikipedia.org/wiki/Psychophysiology) into a
 [tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form for downstream
 analysis and visualization.
 
