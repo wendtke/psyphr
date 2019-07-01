@@ -6,18 +6,17 @@
 #' @export
 read_study <- function(path){
 
-  file_paths <- list.files(path = path,
-                           pattern = ".xlsx$", full.names = TRUE)
+  file_paths <- list.files(path = path, pattern = ".xlsx$", full.names = TRUE)
   file_bare_names <- bare_name(file_paths)
   file_ids <- stringr::str_split(file_bare_names, pattern = "_")
 
   suppressWarnings({
-  workbook_list <- file_paths %>% purrr::map(read_MW)
-
   study <- file_ids %>% dplyr::bind_cols() %>% t() %>% tibble::as_tibble()
+  study <- study %>% rename_all(~ .x %>% str_replace("V", "id_"))
 
-  study$data <- workbook_list
+  study$data <- file_paths %>% purrr::map(read_MW)
   study$format <- study$data %>% map(~ attributes(.x)["format"]) %>% unlist()
+
   structure(study, class = c("psyphr_study", class(study)))
   })
 }
