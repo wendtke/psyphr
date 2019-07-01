@@ -4,8 +4,6 @@
 #'
 #' @return a nested data frame including IDs
 #' @export
-#'
-#' @examples
 read_study <- function(path){
 
   file_paths <- list.files(path = path,
@@ -13,12 +11,28 @@ read_study <- function(path){
   file_bare_names <- bare_name(file_paths)
   file_ids <- stringr::str_split(file_bare_names, pattern = "_")
 
+  suppressWarnings({
   workbook_list <- file_paths %>% purrr::map(read_MW)
 
   study <- file_ids %>% dplyr::bind_cols() %>% t() %>% tibble::as_tibble()
+
   study$data <- workbook_list
+  study$format <- study$data %>% map(~ attributes(.x)["format"]) %>% unlist()
+  structure(study, class = c("psyphr_study", class(study)))
+  })
 }
 
+
+#' Lift Metadata from Workbooks in a Study
+#'
+#' @param study a psyphr study
+#'
+#' @return a psyphr study
+#' @export
+#'
+lift_meta <- function(study){
+  study %>% dplyr::mutate(settings = .data$data %>% purrr::map("Settings"))
+}
 
 
 
