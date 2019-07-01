@@ -18,11 +18,7 @@ read_MW <- function(path){
     } else if (workbook_format %in% "IMP") {tidy_MW_IMP
     } else if (workbook_format %in% "Startle_EMG") {tidy_MW_Startle_EMG
     } else (stop("Input is not in a known format"))
-
-  f(workbook) %>%
-    map(~.x %>%
-          as.data.frame() %>%
-          readr::type_convert(col_types = cols(col_guess())))
+  f(workbook)
 }
 
 
