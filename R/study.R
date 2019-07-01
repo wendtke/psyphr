@@ -10,6 +10,8 @@ read_study <- function(path){
                            pattern = ".xlsx$", full.names = TRUE)
   file_bare_names <- bare_name(file_paths)
   file_ids <- stringr::str_split(file_bare_names, pattern = "_")
+  assertthat::assert_that(length(unique(lapply(file_ids, length))) == 1,
+                          msg = "All file names must follow identical schema.")
 
   suppressWarnings({
   workbook_list <- file_paths %>% purrr::map(read_MW)
