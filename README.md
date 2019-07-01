@@ -27,16 +27,29 @@ applications in version 3.2:
 
   - [Electrodermal Activity
     (EDA)](https://support.mindwaretech.com/manuals/software/eda/3-2/)
+
   - [Heart Rate Variability
     (HRV)](https://support.mindwaretech.com/manuals/software/hrv/3-2/)
+
   - [Electromyography
     (EMG)](https://support.mindwaretech.com/manuals/software/emg/3-2/)
+
   - [Blood Pressure Variability
     (BPV)](https://support.mindwaretech.com/manuals/software/bpv/3-2/)
+
   - [Impedance Cardiography
     (IMP)](https://support.mindwaretech.com/manuals/software/imp/3-2/)
-  - [Basic Signal Analysis
+
+  - 
+    
+    <del>
+    
+    [Basic Signal Analysis
     (BSA)](https://support.mindwaretech.com/manuals/software/bsa/3-2/)
+    
+    </del>
+    
+    (No support currently)
 
 ## Installation
 

@@ -33,7 +33,7 @@ Currently, the package supports data outputs from the the following correspondin
 - [Electromyography (EMG)](https://support.mindwaretech.com/manuals/software/emg/3-2/)
 - [Blood Pressure Variability (BPV)](https://support.mindwaretech.com/manuals/software/bpv/3-2/)
 - [Impedance Cardiography (IMP)](https://support.mindwaretech.com/manuals/software/imp/3-2/)
-- <del>[Basic Signal Analysis (BSA)](https://support.mindwaretech.com/manuals/software/bsa/3-2/)</del> (No support currently)
+- <del>[Basic Signal Analysis (BSA)](https://support.mindwaretech.com/manuals/software/bsa/3-2/)</del>(No support currently)
 
 
 ## Installation
