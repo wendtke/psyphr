@@ -12,16 +12,17 @@ read_study <- function(path){
   assertthat::assert_that(length(unique(lapply(file_ids, length))) == 1,
                           msg = "All file names must follow identical schema.")
 
-  suppressWarnings({
-  study <- file_ids %>% dplyr::bind_cols() %>% t() %>% tibble::as_tibble()
-  study <- study %>% rename_all(~ .x %>% str_replace("V", "id_"))
 
-  study$data <- file_paths %>% purrr::map(read_MW)
+  study <- file_ids %>% dplyr::bind_cols() %>% t() %>% tibble::as_tibble()
+  study <- study %>% dplyr::rename_all(~ .x %>% str_replace("V", "id_"))
+
+  study$data <-   suppressWarnings(file_paths %>% purrr::map(read_MW))
   study$format <- study$data %>% map(~ attributes(.x)["format"]) %>% unlist()
 
   structure(study, class = c("psyphr_study", class(study)))
-  })
+
 }
+
 
 
 #' Lift Metadata from Workbooks in a Study
