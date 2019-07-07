@@ -19,10 +19,10 @@ read_study <- function(path){
     tibble::as_tibble() %>%
     dplyr::rename_all(
       ~ .x %>% str_replace("V", "id_")
-      )
-
-  study$data <-   suppressWarnings(file_paths %>% purrr::map(read_MW))
-  study$format <- study$data %>% map(~ attributes(.x)["format"]) %>% unlist()
+      ) %>%
+    mutate(data = suppressWarnings(file_paths %>% purrr::map(read_MW)),
+           format = data %>% map(~ attributes(.x)["format"]) %>% unlist()
+           )
 
   structure(study, class = c("psyphr_study", class(study)))
 
