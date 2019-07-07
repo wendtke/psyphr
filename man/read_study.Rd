@@ -4,7 +4,7 @@
 \alias{read_study}
 \title{Read a study from a directory}
 \usage{
-read_study(path, delim = "_")
+read_study(path)
 }
 \arguments{
 \item{path}{path to a study directory}

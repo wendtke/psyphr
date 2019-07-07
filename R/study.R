@@ -51,7 +51,8 @@ print.psyphr_study <- function(study){
 #' @export
 #'
 lift_meta <- function(study){
-  study %>% dplyr::mutate(settings = .data$data %>% purrr::map("Settings"))
+  study %>%
+    dplyr::mutate(settings = .data$data %>% purrr::map("Settings"))
 }
 
 
