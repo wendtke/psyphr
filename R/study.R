@@ -13,8 +13,13 @@ read_study <- function(path){
                           msg = "All file names must follow identical schema.")
 
 
-  study <- file_ids %>% dplyr::bind_cols() %>% t() %>% tibble::as_tibble()
-  study <- study %>% dplyr::rename_all(~ .x %>% str_replace("V", "id_"))
+  study <- file_ids %>%
+    dplyr::bind_cols() %>%
+    t() %>%
+    tibble::as_tibble() %>%
+    dplyr::rename_all(
+      ~ .x %>% str_replace("V", "id_")
+      )
 
   study$data <-   suppressWarnings(file_paths %>% purrr::map(read_MW))
   study$format <- study$data %>% map(~ attributes(.x)["format"]) %>% unlist()
