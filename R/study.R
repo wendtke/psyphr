@@ -20,7 +20,7 @@ read_study <- function(path){
     dplyr::rename_all(
       ~ .x %>% str_replace("V", "id_")
       ) %>%
-    mutate(data = suppressWarnings(file_paths %>% purrr::map(read_MW)),
+    dplyr::mutate(data = suppressWarnings(file_paths %>% purrr::map(read_MW)),
            format = data %>% map(~ attributes(.x)["format"]) %>% unlist()
            )
 
