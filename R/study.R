@@ -23,6 +23,19 @@ read_study <- function(path){
 
 }
 
+#' Print a Summary of a Psyphr Study
+#'
+#' @param study
+#'
+#' @return NULL
+#' @export
+#'
+#' @examples
+print.psyphr_study <- function(study){
+  #
+
+
+}
 
 
 #' Lift Metadata from Workbooks in a Study
