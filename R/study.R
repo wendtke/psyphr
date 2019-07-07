@@ -7,7 +7,7 @@
 read_study <- function(path){
 
   file_paths <- list.files(path = path, pattern = ".xlsx$", full.names = TRUE)
-  file_ids <- file_paths %>% bare_name() %>% stringr::str_split(file_bare_names, pattern = "_")
+  file_ids <- file_paths %>% bare_name() %>% stringr::str_split(pattern = "_")
 
   assertthat::assert_that(length(unique(lapply(file_ids, length))) == 1,
                           msg = "All file names must follow identical schema.")
