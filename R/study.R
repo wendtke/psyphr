@@ -7,8 +7,8 @@
 read_study <- function(path){
 
   file_paths <- list.files(path = path, pattern = ".xlsx$", full.names = TRUE)
-  file_bare_names <- bare_name(file_paths)
-  file_ids <- stringr::str_split(file_bare_names, pattern = "_")
+  file_ids <- file_paths %>% bare_name() %>% stringr::str_split(file_bare_names, pattern = "_")
+
   assertthat::assert_that(length(unique(lapply(file_ids, length))) == 1,
                           msg = "All file names must follow identical schema.")
 
@@ -21,7 +21,7 @@ read_study <- function(path){
       ~ .x %>% str_replace("V", "id_")
       ) %>%
     dplyr::mutate(data = suppressWarnings(file_paths %>% purrr::map(read_MW)),
-           format = data %>% map(~ attributes(.x)["format"]) %>% unlist()
+           format = data %>% purrr::map(~ attributes(.x)["format"]) %>% unlist()
            )
 
   structure(study, class = c("psyphr_study", class(study)))
