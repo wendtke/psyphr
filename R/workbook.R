@@ -28,8 +28,9 @@ read_MW <- function(path){
   # Convert types & Assign back attributes
     # This is done at last because all previous steps keep data verbatim as "character"
     # as a precaution to possible errors.
+    # However, as "character" is more expensive than "numeric", it may be necessary to change this behavior
   workbook <- workbook %>%
-    purrr::map(~ .x %>% readr::type_convert(col_types = cols(col_guess()))) %>%
+    purrr::map(~ .x %>% readr::type_convert(col_types = readr::cols(readr::col_guess()))) %>%
     `attributes<-`(workbook_attributes)
 }
 
@@ -70,7 +71,7 @@ detect_MW_workbook_format <- function(workbook){
   this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names(),
                                 settings = workbook %>% `[[`("Settings") %>% psyphr:::df_to_vector() %>% names()
   )
-  names(MW_format_profiles)[map_lgl(MW_format_profiles, ~ identical(.x, this_workbook_profile))]
+  names(MW_format_profiles)[purrr::map_lgl(MW_format_profiles, ~ identical(.x, this_workbook_profile))]
 }
 
 # Tidy Mindware workbooks

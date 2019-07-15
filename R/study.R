@@ -18,7 +18,7 @@ read_study <- function(path){
     t() %>%
     tibble::as_tibble() %>%
     dplyr::rename_all(
-      ~ .x %>% str_replace("V", "id_")
+      ~ .x %>% stringr::str_replace("V", "id_")
       ) %>%
     dplyr::mutate(data = suppressWarnings(file_paths %>% purrr::map(read_MW)),
            format = data %>% purrr::map(~ attributes(.x)["format"]) %>% unlist()
