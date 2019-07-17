@@ -11,7 +11,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/psyphr)](https://cran.r-project.org/package=psyphr)
 <!-- badges: end -->
 
-The `psyphr` R package tranforms data from commercial data collection and processing systems for [psychophysiology](https://en.wikipedia.org/wiki/Psychophysiology) into a
+The `psyphr` R package tranforms
+[psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology)
+data from commercial data collection and processing systems into a
 [tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form for downstream
 analysis and visualization.
 
@@ -85,3 +87,16 @@ The development team considers the following for the package’s future:
   - Study compilation utility
   - Compatibility on data feeds from other popular data collection and
     processing systems (e.g., [BIOPAC](https://www.biopac.com/))
+
+## Acknowledgements
+
+`psyphr` was founded at the [Uncoast
+Unconf 2019](https://github.com/uncoast-unconf/uu-2019) with the help of
+[Amanda Gadrow](https://github.com/ajmcoqui) and [Audrey
+McCombs](https://github.com/almccombs).
+
+This material is based upon work supported by the National Science
+Foundation Graduate Research Fellowship Program under Grant
+No. 006784-00002 \[to KEW\]. Any opinions, findings, and conclusions or
+recommendations expressed in this material are those of the authors and
+do not necessarily reflect the views of the National Science Foundation.
