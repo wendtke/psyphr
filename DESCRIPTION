@@ -1,8 +1,8 @@
 Package: psyphr
 Title: Wrangle Psychophysiological Data 
 Version: 0.1.0.9000
-Description: This R package, founded at the Uncoast Unconf 2019, wrangles and 
-    visualizes psychophysiological data from MindWare Technologies. 
+Description: This R package, founded at the Uncoast Unconf 2019, wrangles, 
+    visualizes, and analyzes psychophysiological data from MindWare Technologies. 
     This material is based upon work supported by the 
     National Science Foundation Graduate Research Fellowship Program 
     under Grant No. 006784-00002 [to KEW]. Any opinions, findings, and 
