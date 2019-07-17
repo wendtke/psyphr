@@ -93,7 +93,10 @@ The development team considers the following for the package’s future:
 `psyphr` was founded at the [Uncoast
 Unconf 2019](https://github.com/uncoast-unconf/uu-2019) with the help of
 [Amanda Gadrow](https://github.com/ajmcoqui) and [Audrey
-McCombs](https://github.com/almccombs).
+McCombs](https://github.com/almccombs). Travel to the Uncoast Unconf was
+supported by Colorado State University (Department of Human Development
+and Family Studies and The Graduate School) and the Uncoast Unconf
+organizing committee.
 
 This material is based upon work supported by the National Science
 Foundation Graduate Research Fellowship Program under Grant
