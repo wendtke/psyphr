@@ -96,7 +96,8 @@ Unconf 2019](https://github.com/uncoast-unconf/uu-2019) with the help of
 McCombs](https://github.com/almccombs). Travel to the Uncoast Unconf was
 supported by Colorado State University (Department of Human Development
 and Family Studies and The Graduate School) and the Uncoast Unconf
-organizing committee.
+organizing committee, particularly [Dr. Sam
+Tyner](https://sctyner.github.io/).
 
 This material is based upon work supported by the National Science
 Foundation Graduate Research Fellowship Program under Grant
