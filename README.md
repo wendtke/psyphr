@@ -7,44 +7,81 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/psyphr)](https://cran.r-project.org/package=psyphr)
 <!-- badges: end -->
 
-The `psyphr` R package turns
-[psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology)
-data from proprietary data collection and processing systems into a
+The `psyphr` R package tranforms data from commercial data collection and processing systems for [psychophysiology](https://en.wikipedia.org/wiki/Psychophysiology) into a
 [tidy](http://vita.had.co.nz/papers/tidy-data.pdf) form for downstream
 analysis and visualization.
 
-The package is currently under active development. Currently, only
-[Electrodermal
-Activity](https://support.mindwaretech.com/manuals/software/eda/3-2/)
-and [Heart Rate
-Variability](https://support.mindwaretech.com/manuals/software/hrv/3-2/)
-output data from [MindWare Technologies](https://www.mindwaretech.com/)
-are supported.
+### WIP
 
-## TODO
+The package is currently under active development.
 
-The development team considers the following for the package’s future:
+Currently, the package supports data outputs from the the following
+corresponding [MindWare Technologies](https://www.mindwaretech.com/)
+applications in version 3.2:
 
-  - Customizable data QA utilities, with meaningful defaults
-  - Common visualization schemes
-  - Study compilation utility
-  - Compatibility on data feeds from other popular data collection and
-    processing systems (e.g., [BIOPAC](https://www.biopac.com/))
+  - [Electrodermal Activity
+    (EDA)](https://support.mindwaretech.com/manuals/software/eda/3-2/)
+
+  - [Heart Rate Variability
+    (HRV)](https://support.mindwaretech.com/manuals/software/hrv/3-2/)
+
+  - [Electromyography
+    (EMG)](https://support.mindwaretech.com/manuals/software/emg/3-2/)
+
+  - [Blood Pressure Variability
+    (BPV)](https://support.mindwaretech.com/manuals/software/bpv/3-2/)
+
+  - [Impedance Cardiography
+    (IMP)](https://support.mindwaretech.com/manuals/software/imp/3-2/)
+
+  - 
+    
+    <del>
+    
+    [Basic Signal Analysis
+    (BSA)](https://support.mindwaretech.com/manuals/software/bsa/3-2/)
+    
+    </del>
+    
+    (No support currently)
 
 ## Installation
 
-You can install the released version of psyphr from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("psyphr")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+Install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("wendtke/psyphr")
 ```
+
+## Usage
+
+Load and attach `psyphr`.
+
+``` r
+require(psyphr)
+```
+
+### Read a Single File
+
+### Compile a Study
+
+#### Directory Structure
+
+### Exploratory Analysis
+
+## TODO
+
+The development team considers the following for the package’s future:
+
+  - Submit `psyphr` to [rOpenSci](https://ropensci.org/) for peer review
+    and publication
+  - Customizable data QA utilities with meaningful defaults
+  - Common, publication-grade visualization schemes
+  - Study compilation utility
+  - Compatibility on data feeds from other popular data collection and
+    processing systems (e.g., [BIOPAC](https://www.biopac.com/))
