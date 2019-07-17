@@ -4,7 +4,7 @@
 #'
 #' @return a list of data frames, as a S3 object
 #' @export
-#' @import magrittr
+#' @importFrom magrittr %>%
 read_MW <- function(path){
   workbook <- read_MW_workbook(path)
   workbook_format <- detect_MW_workbook_format(workbook)
