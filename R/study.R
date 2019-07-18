@@ -6,11 +6,15 @@
 #' @export
 read_study <- function(path, structure = "flat"){
 
-  file_paths <- list.files(path = path, pattern = ".xlsx$", full.names = TRUE, recursive = TRUE)
+  file_paths <- list.files(path = path, pattern = "\\.xlsx$", full.names = TRUE, recursive = TRUE)
   file_ids <-
     dplyr::case_when(
-      structure == "flat" ~ file_paths %>% bare_name() %>% stringr::str_split(pattern = "_"),
-      structure == "recursive" ~ file_paths %>% gsub("\\..*$", "", .) %>% stringr::str_split(pattern = "/")
+      structure == "flat" ~
+        file_paths %>% bare_name() %>% stringr::str_split(pattern = "_"),
+      structure == "recursive" ~
+        list.files(path = path, pattern = "\\.xlsx$", recursive = TRUE) %>%
+        gsub("\\..*$", "", .) %>%
+        stringr::str_split(pattern = "/")
       )
 
 
