@@ -28,8 +28,9 @@ read_MW <- function(path){
     # This is done at last because all previous steps keep data verbatim as "character"
     # as a precaution to possible errors.
     # However, as "character" is more expensive than "numeric", it may be necessary to change this behavior
-  workbook <- workbook %>%
-    purrr::map(~ .x %>% readr::type_convert(col_types = readr::cols(readr::col_guess()))) %>%
+  workbook %>%
+    purrr::quietly(purrr::map)(~ .x %>% readr::type_convert(col_types = readr::cols(readr::col_guess()))) %>%
+    `[[`("result") %>%
     `attributes<-`(workbook_attributes)
 }
 
@@ -44,13 +45,14 @@ read_MW_workbook <- function(path){
   sheet_names <- readxl::excel_sheets(path)
 
   # Read each sheet from workbook
-  workbook <- purrr::quitely(purrr::map(sheet_names,
+  workbook <- purrr::quietly(purrr::map)(sheet_names,
                   ~ readxl::read_excel(path = path,
                                sheet = .,
                                na = c("", "N/A"),
                                col_names = FALSE,
                                col_types = "text")
-  )) %>% magrittr::set_names(sheet_names)
+  ) %>% `[[`("result") %>%
+    magrittr::set_names(sheet_names)
 
   structure(
     workbook,

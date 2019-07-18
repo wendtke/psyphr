@@ -4,14 +4,18 @@
 #'
 #' @return a data frame; psyphr study S3 object
 #' @export
-read_study <- function(path){
+read_study <- function(path, structure = "flat"){
 
-  file_paths <- list.files(path = path, pattern = ".xlsx$", full.names = TRUE)
-  file_ids <- file_paths %>% bare_name() %>% stringr::str_split(pattern = "_")
+  file_paths <- list.files(path = path, pattern = ".xlsx$", full.names = TRUE, recursive = TRUE)
+  file_ids <-
+    dplyr::case_when(
+      structure == "flat" ~ file_paths %>% bare_name() %>% stringr::str_split(pattern = "_"),
+      structure == "recursive" ~ file_paths %>% gsub("\\..*$", "", .) %>% stringr::str_split(pattern = "/")
+      )
+
 
   assertthat::assert_that(length(unique(lapply(file_ids, length))) == 1,
                           msg = "All file names must follow identical schema.")
-
 
   study <- file_ids %>%
     dplyr::bind_cols() %>%
@@ -20,7 +24,7 @@ read_study <- function(path){
     dplyr::rename_all(
       ~ .x %>% stringr::str_replace("V", "id_")
       ) %>%
-    dplyr::mutate(data = file_paths %>% purrr::quitely(purrr::map(read_MW)),
+    dplyr::mutate(data = file_paths %>% purrr::quietly(purrr::map)(read_MW) %>% `[[`("result"),
            format = data %>% purrr::map(~ attributes(.x)["format"]) %>% unlist()
            )
 
