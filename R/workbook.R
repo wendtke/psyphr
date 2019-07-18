@@ -1,10 +1,9 @@
 #' Read a MindWare Workbook
 #'
-#' @param path file path to workbook
+#' @param path a character string; path to a workbook
 #'
-#' @return a list of data frames, as a S3 object
+#' @return a list of data frames; psyphr workbook S3 object
 #' @export
-#' @importFrom magrittr %>%
 read_MW <- function(path){
   workbook <- read_MW_workbook(path)
   workbook_format <- detect_MW_workbook_format(workbook)
@@ -29,8 +28,9 @@ read_MW <- function(path){
     # This is done at last because all previous steps keep data verbatim as "character"
     # as a precaution to possible errors.
     # However, as "character" is more expensive than "numeric", it may be necessary to change this behavior
-  workbook <- workbook %>%
-    purrr::map(~ .x %>% readr::type_convert(col_types = readr::cols(readr::col_guess()))) %>%
+  workbook %>%
+    purrr::quietly(purrr::map)(~ .x %>% readr::type_convert(col_types = readr::cols(readr::col_guess()))) %>%
+    `[[`("result") %>%
     `attributes<-`(workbook_attributes)
 }
 
@@ -45,16 +45,14 @@ read_MW_workbook <- function(path){
   sheet_names <- readxl::excel_sheets(path)
 
   # Read each sheet from workbook
-  suppressMessages({
-  workbook <- purrr::map(sheet_names,
+  workbook <- purrr::quietly(purrr::map)(sheet_names,
                   ~ readxl::read_excel(path = path,
                                sheet = .,
                                na = c("", "N/A"),
                                col_names = FALSE,
                                col_types = "text")
-  ) %>% magrittr::set_names(sheet_names)
-
-  })
+  ) %>% `[[`("result") %>%
+    magrittr::set_names(sheet_names)
 
   structure(
     workbook,

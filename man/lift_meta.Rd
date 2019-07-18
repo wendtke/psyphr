@@ -7,10 +7,10 @@
 lift_meta(study)
 }
 \arguments{
-\item{study}{a psyphr study}
+\item{study}{a psyphr study object}
 }
 \value{
-a psyphr study
+a psyphr study S3 object
 }
 \description{
 Lift Metadata from Workbooks in a Study

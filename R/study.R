@@ -1,17 +1,25 @@
 #' Read a study from a directory
 #'
-#' @param path path to a study directory
+#' @param path a character string; path to a study directory
 #'
-#' @return a nested data frame including IDs
+#' @return a data frame; psyphr study S3 object
 #' @export
-read_study <- function(path){
+read_MW_study <- function(path, structure = "flat"){
 
-  file_paths <- list.files(path = path, pattern = ".xlsx$", full.names = TRUE)
-  file_ids <- file_paths %>% bare_name() %>% stringr::str_split(pattern = "_")
+  file_paths <- list.files(path = path, pattern = "\\.xlsx$", full.names = TRUE, recursive = TRUE)
+  file_ids <-
+    dplyr::case_when(
+      structure == "flat" ~
+        file_paths %>% bare_name() %>% stringr::str_split(pattern = "_"),
+      structure == "recursive" ~
+        list.files(path = path, pattern = "\\.xlsx$", recursive = TRUE) %>%
+        gsub("\\..*$", "", .) %>%
+        stringr::str_split(pattern = "/")
+      )
+
 
   assertthat::assert_that(length(unique(lapply(file_ids, length))) == 1,
                           msg = "All file names must follow identical schema.")
-
 
   study <- file_ids %>%
     dplyr::bind_cols() %>%
@@ -20,7 +28,7 @@ read_study <- function(path){
     dplyr::rename_all(
       ~ .x %>% stringr::str_replace("V", "id_")
       ) %>%
-    dplyr::mutate(data = suppressWarnings(file_paths %>% purrr::map(read_MW)),
+    dplyr::mutate(data = file_paths %>% purrr::quietly(purrr::map)(read_MW) %>% `[[`("result"),
            format = data %>% purrr::map(~ attributes(.x)["format"]) %>% unlist()
            )
 
@@ -30,7 +38,7 @@ read_study <- function(path){
 
 #' Print a Summary of a Psyphr Study
 #'
-#' @param study
+#' @param study a psyphr study object
 #'
 #' @return NULL
 #' @export
@@ -45,9 +53,9 @@ print.psyphr_study <- function(study){
 
 #' Lift Metadata from Workbooks in a Study
 #'
-#' @param study a psyphr study
+#' @param study a psyphr study object
 #'
-#' @return a psyphr study
+#' @return a psyphr study S3 object
 #' @export
 #'
 lift_meta <- function(study){
@@ -59,15 +67,16 @@ lift_meta <- function(study){
 
 #' Flatten a Study with a Recursive File Structure
 #'
-#' @param origin origin path
-#' @param dest destination path
-#' @param delim file name delimiter
+#' @param origin a character string; origin path
+#' @param dest a character string; destination path
+#' @param delim a character string; file name delimiter
 #'
 #' @export
 flatten_study_dir <- function(origin, dest, delim = "_"){
   `if`(dir.exists(dest),NULL,dir.create(dest))
 
   origin_file_name <- list.files(origin, recursive = TRUE)
+  `if`(any(grepl(delim, origin_file_name)), stop("path should not contain delimiter"))
   dest_file_name <- gsub("/", delim, origin_file_name)
 
   origin_file_path <- file.path(origin, origin_file_name)
@@ -78,4 +87,27 @@ flatten_study_dir <- function(origin, dest, delim = "_"){
   }
 }
 
+#' Lift a Study with a Flat File Structure
+#'
+#' @param origin a character string; origin path
+#' @param dest a character string; destination path
+#' @param delim a character string; file name delimiter
+#'
+#' @export
+lift_study_dir <- function(origin, dest, delim = "_"){
+  `if`(dir.exists(dest),NULL,dir.create(dest))
+
+  origin_file_name <- list.files(origin, recursive = FALSE)
+  dest_file_name <- gsub(delim, "/", origin_file_name)
+
+  origin_file_path <- file.path(origin, origin_file_name)
+  dest_file_path <- file.path(dest,dest_file_name)
+
+  for (i in seq_along(origin_file_path)){
+    if (!dir.exists(dirname(dest_file_path[i]))) {
+      dir.create(dirname(dest_file_path[i]), recursive = TRUE)
+    }
+    file.copy(origin_file_path[i], dest_file_path[i])
+  }
+}
 

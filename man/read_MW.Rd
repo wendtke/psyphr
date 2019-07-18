@@ -7,10 +7,10 @@
 read_MW(path)
 }
 \arguments{
-\item{path}{file path to workbook}
+\item{path}{a character string; path to a workbook}
 }
 \value{
-a list of data frames, as a S3 object
+a list of data frames; psyphr workbook S3 object
 }
 \description{
 Read a MindWare Workbook

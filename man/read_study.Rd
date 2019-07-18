@@ -7,10 +7,10 @@
 read_study(path)
 }
 \arguments{
-\item{path}{path to a study directory}
+\item{path}{a character string; path to a study directory}
 }
 \value{
-a nested data frame including IDs
+a data frame; psyphr study S3 object
 }
 \description{
 Read a study from a directory
