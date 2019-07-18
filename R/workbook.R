@@ -45,16 +45,13 @@ read_MW_workbook <- function(path){
   sheet_names <- readxl::excel_sheets(path)
 
   # Read each sheet from workbook
-  suppressMessages({
-  workbook <- purrr::map(sheet_names,
+  workbook <- purrr::quitely(purrr::map(sheet_names,
                   ~ readxl::read_excel(path = path,
                                sheet = .,
                                na = c("", "N/A"),
                                col_names = FALSE,
                                col_types = "text")
-  ) %>% magrittr::set_names(sheet_names)
-
-  })
+  )) %>% magrittr::set_names(sheet_names)
 
   structure(
     workbook,
