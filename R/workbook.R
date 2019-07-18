@@ -2,7 +2,7 @@
 #'
 #' @param path a character string; path to a workbook
 #'
-#' @return a list of data frames, as a S3 object
+#' @return a list of data frames; psyphr workbook S3 object
 #' @export
 read_MW <- function(path){
   workbook <- read_MW_workbook(path)

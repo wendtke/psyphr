@@ -2,7 +2,7 @@
 #'
 #' @param path a character string; path to a study directory
 #'
-#' @return a nested data frame including IDs
+#' @return a data frame; psyphr study S3 object
 #' @export
 read_study <- function(path){
 
@@ -30,7 +30,7 @@ read_study <- function(path){
 
 #' Print a Summary of a Psyphr Study
 #'
-#' @param study
+#' @param study a psyphr study object
 #'
 #' @return NULL
 #' @export
@@ -45,9 +45,9 @@ print.psyphr_study <- function(study){
 
 #' Lift Metadata from Workbooks in a Study
 #'
-#' @param study a psyphr study
+#' @param study a psyphr study object
 #'
-#' @return a psyphr study
+#' @return a psyphr study S3 object
 #' @export
 #'
 lift_meta <- function(study){
@@ -59,9 +59,9 @@ lift_meta <- function(study){
 
 #' Flatten a Study with a Recursive File Structure
 #'
-#' @param origin origin path
-#' @param dest destination path
-#' @param delim file name delimiter
+#' @param origin a character string; origin path
+#' @param dest a character string; destination path
+#' @param delim a character string; file name delimiter
 #'
 #' @export
 flatten_study_dir <- function(origin, dest, delim = "_"){
