@@ -1,10 +1,9 @@
 #' Read a MindWare Workbook
 #'
-#' @param path file path to workbook
+#' @param path a character string; path to a workbook
 #'
 #' @return a list of data frames, as a S3 object
 #' @export
-#' @importFrom magrittr %>%
 read_MW <- function(path){
   workbook <- read_MW_workbook(path)
   workbook_format <- detect_MW_workbook_format(workbook)
