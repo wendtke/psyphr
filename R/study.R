@@ -68,6 +68,7 @@ flatten_study_dir <- function(origin, dest, delim = "_"){
   `if`(dir.exists(dest),NULL,dir.create(dest))
 
   origin_file_name <- list.files(origin, recursive = TRUE)
+  `if`(any(grepl(delim, origin_file_name)), stop("path should not contain delimiter"))
   dest_file_name <- gsub("/", delim, origin_file_name)
 
   origin_file_path <- file.path(origin, origin_file_name)
