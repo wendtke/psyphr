@@ -4,7 +4,7 @@
 #'
 #' @return a data frame; psyphr study S3 object
 #' @export
-read_study <- function(path, structure = "flat"){
+read_MW_study <- function(path, structure = "flat"){
 
   file_paths <- list.files(path = path, pattern = "\\.xlsx$", full.names = TRUE, recursive = TRUE)
   file_ids <-
