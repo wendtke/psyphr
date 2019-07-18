@@ -79,4 +79,27 @@ flatten_study_dir <- function(origin, dest, delim = "_"){
   }
 }
 
+#' Lift a Study with a Flat File Structure
+#'
+#' @param origin a character string; origin path
+#' @param dest a character string; destination path
+#' @param delim a character string; file name delimiter
+#'
+#' @export
+lift_study_dir <- function(origin, dest, delim = "_"){
+  `if`(dir.exists(dest),NULL,dir.create(dest))
+
+  origin_file_name <- list.files(origin, recursive = FALSE)
+  dest_file_name <- gsub(delim, "/", origin_file_name)
+
+  origin_file_path <- file.path(origin, origin_file_name)
+  dest_file_path <- file.path(dest,dest_file_name)
+
+  for (i in seq_along(origin_file_path)){
+    if (!dir.exists(dirname(dest_file_path[i]))) {
+      dir.create(dirname(dest_file_path[i]), recursive = TRUE)
+    }
+    file.copy(origin_file_path[i], dest_file_path[i])
+  }
+}
 
