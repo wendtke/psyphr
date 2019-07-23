@@ -83,7 +83,8 @@ tidy_MW_BPV <- function(workbook){
 
   # IBI
   workbook[[2]] <- workbook[[2]] %>%
-    first_row_to_colnames()
+    first_row_to_colnames() %>%
+    tidyr::gather(key = "Segment", value = "Interval")
 
   # Systolic Amplitudes
   workbook[[3]] <- workbook[[3]] %>%
@@ -192,7 +193,8 @@ tidy_MW_HRV <- function(workbook){
 
   # IBI
   workbook[[2]] <- workbook[[2]] %>%
-    first_row_to_colnames()
+    first_row_to_colnames() %>%
+    tidyr::gather(key = "Segment", value = "Interval")
 
   # Power Band Stats
   workbook[[3]] <- workbook[[3]] %>%
@@ -248,7 +250,8 @@ tidy_MW_IMP <- function(workbook){
 
   # IBI
   workbook[[2]] <- workbook[[2]] %>%
-    first_row_to_colnames()
+    first_row_to_colnames() %>%
+    tidyr::gather(key = "Segment", value = "Interval")
 
   # Editing Stats
   workbook[[3]] <- workbook[[3]] %>%
