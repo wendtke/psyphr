@@ -6,3 +6,4 @@
 sample_study_MW <- function(){
   system.file("extdata/MW/study", package = "psyphr")
 }
+

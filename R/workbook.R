@@ -65,7 +65,7 @@ read_MW_workbook <- function(path){
 
 # Detect the workbook format as a string
 detect_MW_workbook_format <- function(workbook){
-  MW_format_profiles <- readRDS(system.file("extdata/MW_format/MW_format_profiles.rds",
+  MW_format_profiles <- readRDS(system.file("extdata/MW/MW_format_profiles.rds",
                                             package = "psyphr",
                                             mustWork = TRUE))
   this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names(),
