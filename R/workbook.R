@@ -233,7 +233,7 @@ tidy_MW_HRV <- function(workbook){
   workbook[[7]] <- workbook[[7]][2:nrow(workbook[[7]]), ] %>%
     first_row_to_colnames() %>%
     dplyr::mutate(`Segment Index` = 1:nrow(.)) %>%
-    tidyr::gather(key = "Segment", value = "Value") %>%
+    tidyr::gather(key = "Segment", value = "Value", -`Segment Index`) %>%
     dplyr::mutate(`Session Index` = 1:nrow(.))
   attr(workbook[[7]], "Resp Delta") <- resp_delta
 
