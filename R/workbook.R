@@ -35,6 +35,18 @@ read_MW <- function(path){
 }
 
 
+#' Print Brief Info on psyphr_workbook
+#'
+#' @param x
+#'
+#' @return NULL
+#' @export
+#'
+print.psyphr_workbook <- function(x){
+  cat("<psyphr_workbook>", attr(x, "device_vendor"), attr(x, "format"), "\n",
+      "file:", attr(x, "file_path"), "\n")
+}
+
 #### Internal ####
 
 # Read a MindWare Workbook in Excel format
@@ -58,8 +70,8 @@ read_MW_workbook <- function(path){
     workbook,
     class = c("psyphr_workbook", class(workbook)),
     device_vendor = "MindWare",
-    origin_path = path,
-    origin_mtime = file.mtime(path)
+    file_path = path,
+    file_mtime = file.mtime(path)
     )
 }
 
