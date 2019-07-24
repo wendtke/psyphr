@@ -11,6 +11,7 @@ sample_study_MW <- function(){
 #' Recursively Print out the Structure of a List
 #'
 #' @param x a list or environment
+#' @param limit recursive level limit
 #' @param unclass expand list-like objects
 #' @param compact don't show unnamed elements
 #' @param rich show length & memory size of element
@@ -19,7 +20,7 @@ sample_study_MW <- function(){
 #' @return character string of the screen output
 #' @export
 #'
-tree <- function(x = .GlobalEnv, unclass = FALSE, compact = TRUE, rich = FALSE, all.names = FALSE){
+tree <- function(x = .GlobalEnv, limit = 5, unclass = FALSE, compact = TRUE, rich = FALSE, all.names = FALSE){
   if (!(mode(x) %in% c("list", "environment") & length(x) > 0)){
     stop("Please provide a non-empty list or environment")
   }
@@ -90,7 +91,7 @@ tree <- function(x = .GlobalEnv, unclass = FALSE, compact = TRUE, rich = FALSE, 
                             mode(element),
                             class(element)
       )
-      if (any(element_class %in% c("list", "environment")) & length(element) > 0){
+      if (any(element_class %in% c("list", "environment")) & length(element) > 0 & level < limit){
         traverse(x = element, level = level + 1, branches_end = branches_end)
       }
     }
