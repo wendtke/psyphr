@@ -10,7 +10,7 @@ sample_study_MW <- function(){
 
 #' Recursively Print out the Structure of a List
 #'
-#' @param x a list, or another subsettable object
+#' @param x a list or environment
 #' @param unclass expand list-like objects
 #' @param compact don't show unnamed elements
 #' @param rich show length & memory size of element
