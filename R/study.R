@@ -1,10 +1,13 @@
 #' Read a study from a directory
 #'
-#' @param path a character string; path to a study directory
+#' @param path path to a study directory; a character string
+#' @param structure directory structure; "flat" or "recursive"
+#' @param stash whether to cache data on disk; logical
+#' @param stash_dir_path cache directory; a character string
 #'
 #' @return a data frame; psyphr study S3 object
 #' @export
-read_MW_study <- function(path, stash = FALSE, structure = "flat"){
+read_MW_study <- function(path, structure = "flat", stash = FALSE, stash_dir_path = tempdir()){
   file_paths <- list.files(path = path, pattern = "\\.xlsx$", full.names = TRUE, recursive = TRUE)
   file_ids <-
     dplyr::case_when(
@@ -31,7 +34,9 @@ read_MW_study <- function(path, stash = FALSE, structure = "flat"){
   if (stash){
     study$stash <-  as.list(vector(length = nrow(study)))
     for (i in 1:nrow(study)){
-      study$stash[[i]] <- stash(read_MW(file_paths[i]), file_name = paste(file_ids[[i]], collapse = "_"))
+      study$stash[[i]] <- stash(read_MW(file_paths[i]),
+                                dir_path = stash_dir_path,
+                                file_name = paste(file_ids[[i]], collapse = "_"))
     }
 
     study$format <- vector(length = nrow(study))
