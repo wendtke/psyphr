@@ -6,8 +6,9 @@
 #' @return a stash_pointer obj
 #' @export
 #'
-stash <- function(object, dir_path = tempdir()){
-  file_name <- paste0(paste0(sample(c(letters, LETTERS, 0:9), 20, TRUE), collapse = ""), ".RStash")
+stash <- function(object,
+                  dir_path = tempdir(),
+                  file_name = paste0(paste0(sample(c(letters, LETTERS, 0:9), 20, TRUE), collapse = ""), ".RStash")){
   file_path <- file.path(dir_path, file_name)
   saveRDS(object, file_path)
   f <- function(){
