@@ -25,6 +25,8 @@ tree <- function(x = .GlobalEnv, limit = 5, unclass = FALSE, compact = TRUE, ric
     stop("Please provide a non-empty list or environment")
   }
 
+  if (length(ls(x)) == 0) return(NULL)
+
   element_profile <- function(name, body){
     c(
       "$", name,
