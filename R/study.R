@@ -4,36 +4,39 @@
 #'
 #' @return a data frame; psyphr study S3 object
 #' @export
-read_MW_study <- function(path, structure = "flat"){
-
+read_MW_study <- function(path, stash = FALSE, structure = "flat"){
   file_paths <- list.files(path = path, pattern = "\\.xlsx$", full.names = TRUE, recursive = TRUE)
-  file_ids <-
-    dplyr::case_when(
-      structure == "flat" ~
-        file_paths %>% bare_name() %>% stringr::str_split(pattern = "_"),
-      structure == "recursive" ~
-        list.files(path = path, pattern = "\\.xlsx$", recursive = TRUE) %>%
-        gsub("\\..*$", "", .) %>%
-        stringr::str_split(pattern = "/")
+
+  make_study_skeleton <- function(path, file_paths){
+    file_ids <-
+      dplyr::case_when(
+        structure == "flat" ~
+          file_paths %>% bare_name() %>% stringr::str_split(pattern = "_"),
+        structure == "recursive" ~
+          list.files(path = path, pattern = "\\.xlsx$", recursive = TRUE) %>%
+          gsub("\\..*$", "", .) %>%
+          stringr::str_split(pattern = "/")
       )
 
 
-  assertthat::assert_that(length(unique(lapply(file_ids, length))) == 1,
-                          msg = "All file names must follow identical schema.")
+    assertthat::assert_that(length(unique(lapply(file_ids, length))) == 1,
+                            msg = "All file names must follow identical schema.")
 
-  study <- file_ids %>%
-    dplyr::bind_cols() %>%
-    t() %>%
-    tibble::as_tibble() %>%
-    dplyr::rename_all(
-      ~ .x %>% stringr::str_replace("V", "id_")
-      ) %>%
-    dplyr::mutate(data = file_paths %>% purrr::quietly(purrr::map)(read_MW) %>% `[[`("result"),
-           format = data %>% purrr::map(~ attributes(.x)["format"]) %>% unlist()
-           )
+    study <- file_ids %>%
+      dplyr::bind_cols() %>%
+      t() %>%
+      tibble::as_tibble() %>%
+      dplyr::rename_all(
+        ~ .x %>% stringr::str_replace("V", "id_")
+      )
+    structure(study, class = c("psyphr_study", class(study)))
+  }
 
-  structure(study, class = c("psyphr_study", class(study)))
-
+  make_study_skeleton(path, file_paths) %>%
+    dplyr::mutate(
+      data = file_paths %>% purrr::quietly(purrr::map)(read_MW) %>% `[[`("result"),
+      format = data %>% purrr::map( ~ attributes(.x)["format"]) %>% unlist()
+    )
 }
 
 #' Print a Summary of a Psyphr Study
