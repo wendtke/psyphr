@@ -23,7 +23,10 @@ MW_Settings_fields <-
 MW_format_profiles <-
   map2(MW_worksheets_names,
        MW_Settings_fields,
-       ~list(worksheets = .x, settings = .y)) %>%
+       ~list(worksheets = .x
+             # settings = .y)
+       )) %>%
   `names<-`(MW_format_names)
 
 saveRDS(MW_format_profiles, file = "inst/extdata/MW/MW_format_profiles.rds")
+
