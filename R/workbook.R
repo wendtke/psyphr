@@ -96,19 +96,22 @@ tidy_MW_BPV <- function(workbook){
   # IBI
   workbook[[2]] <- workbook[[2]] %>%
     first_row_to_colnames() %>%
-    tidyr::gather(key = "Segment", value = "Value")
+    gather_segments()
 
   # Systolic Amplitudes
   workbook[[3]] <- workbook[[3]] %>%
-    first_row_to_colnames()
+    first_row_to_colnames() %>%
+    gather_segments()
 
   # Diastolic Amplitudes
   workbook[[4]] <- workbook[[4]] %>%
-    first_row_to_colnames()
+    first_row_to_colnames() %>%
+    gather_segments()
 
   # MAP
   workbook[[5]] <- workbook[[5]] %>%
-    first_row_to_colnames()
+    first_row_to_colnames() %>%
+    gather_segments()
 
   # HR Power Band Stats
   workbook[[6]] <- workbook[[6]] %>%
@@ -206,9 +209,7 @@ tidy_MW_HRV <- function(workbook){
   # IBI
   workbook[[2]] <- workbook[[2]] %>%
     first_row_to_colnames() %>%
-    dplyr::mutate(`Segment Index` = 1:nrow(.)) %>%
-    tidyr::gather(key = "Segment", value = "Value", -`Segment Index`) %>%
-    dplyr::mutate(`Session Index` = 1:nrow(.))
+    gather_segments()
 
   # Power Band Stats
   workbook[[3]] <- workbook[[3]] %>%
@@ -217,17 +218,15 @@ tidy_MW_HRV <- function(workbook){
   # Heart Rate Time Series
   workbook[[4]] <- workbook[[4]] %>%
     first_row_to_colnames() %>%
-    dplyr::mutate(`Segment Index` = 1:nrow(.)) %>%
-    tidyr::gather(key = "Segment", value = "Value", -`Segment Index`) %>%
-    dplyr::mutate(`Session Index` = 1:nrow(.))
+    gather_segments()
+
 
   # Heart Period Power Spectrum
   hr_delta_f <- workbook[[5]][1,1, drop = TRUE]
   workbook[[5]] <- workbook[[5]][2:nrow(workbook[[5]]), ] %>%
     first_row_to_colnames() %>%
-    dplyr::mutate(`Segment Index` = 1:nrow(.)) %>%
-    tidyr::gather(key = "Segment", value = "Value", -`Segment Index`) %>%
-    dplyr::mutate(`Session Index` = 1:nrow(.))
+    gather_segments()
+
   attr(workbook[[5]], "HR Delta F") <- hr_delta_f
 
 
@@ -235,18 +234,16 @@ tidy_MW_HRV <- function(workbook){
   resp_delta_t <- workbook[[6]][1,1, drop = TRUE]
   workbook[[6]] <- workbook[[6]][2:nrow(workbook[[6]]), ] %>%
     first_row_to_colnames() %>%
-    dplyr::mutate(`Segment Index` = 1:nrow(.)) %>%
-    tidyr::gather(key = "Segment", value = "Value", -`Segment Index`) %>%
-    dplyr::mutate(`Session Index` = 1:nrow(.))
+    gather_segments()
+
   attr(workbook[[6]], "Resp Delta T") <- resp_delta_t
 
   # Respiration Power Spectrum
   resp_delta <- workbook[[7]][1,1, drop = TRUE]
   workbook[[7]] <- workbook[[7]][2:nrow(workbook[[7]]), ] %>%
     first_row_to_colnames() %>%
-    dplyr::mutate(`Segment Index` = 1:nrow(.)) %>%
-    tidyr::gather(key = "Segment", value = "Value", -`Segment Index`) %>%
-    dplyr::mutate(`Session Index` = 1:nrow(.))
+    gather_segments()
+
   attr(workbook[[7]], "Resp Delta") <- resp_delta
 
   # Interval Stats
@@ -279,7 +276,7 @@ tidy_MW_IMP <- function(workbook){
   # IBI
   workbook[[2]] <- workbook[[2]] %>%
     first_row_to_colnames() %>%
-    tidyr::gather(key = "Segment", value = "Value")
+    gather_segments()
 
   # Editing Stats
   workbook[[3]] <- workbook[[3]] %>%
