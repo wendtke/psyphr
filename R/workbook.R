@@ -353,3 +353,11 @@ first_row_to_colnames <- function(.data){
 bare_name <- function(path){
   gsub("(\\.+)(?!.*\\1).*$", "", basename(path), perl = TRUE)
 }
+
+# Gather segments
+gather_segments <- function(.data){
+  .data %>%
+    dplyr::mutate(`Segment Index` = 1:nrow(.)) %>%
+    tidyr::gather(key = "Segment", value = "Value", -`Segment Index`) %>%
+    dplyr::mutate(`Session Index` = 1:nrow(.))
+}
