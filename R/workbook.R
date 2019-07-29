@@ -80,8 +80,8 @@ detect_MW_workbook_format <- function(workbook){
   MW_format_profiles <- readRDS(system.file("extdata/MW/MW_format_profiles.rds",
                                             package = "psyphr",
                                             mustWork = TRUE))
-  this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names(),
-                                settings = workbook %>% `[[`("Settings") %>% psyphr:::df_to_vector() %>% names()
+  this_workbook_profile <- list(worksheets = workbook %>% rlang::squash() %>% names()
+                                # settings = workbook %>% `[[`("Settings") %>% psyphr:::df_to_vector() %>% names()
   )
   names(MW_format_profiles)[purrr::map_lgl(MW_format_profiles, ~ identical(.x, this_workbook_profile))]
 }
