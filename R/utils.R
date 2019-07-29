@@ -12,6 +12,7 @@ sample_study_MW <- function(){
 #'
 #' @param x a list or environment
 #' @param limit recursive level limit
+#' @param class show class of object
 #' @param unclass expand list-like objects
 #' @param compact don't show unnamed elements
 #' @param rich show length & memory size of element
@@ -20,7 +21,7 @@ sample_study_MW <- function(){
 #' @return character string of the screen output
 #' @export
 #'
-tree <- function(x = .GlobalEnv, limit = 5, unclass = FALSE, compact = TRUE, rich = FALSE, all.names = FALSE){
+tree <- function(x = .GlobalEnv, limit = 5, class = TRUE, unclass = FALSE, compact = TRUE, rich = FALSE, all.names = FALSE){
   if (!(mode(x) %in% c("list", "environment") & length(x) > 0)){
     stop("Please provide a non-empty list or environment")
   }
@@ -30,7 +31,7 @@ tree <- function(x = .GlobalEnv, limit = 5, unclass = FALSE, compact = TRUE, ric
   element_profile <- function(name, body){
     c(
       "$", name,
-      " (",paste(class(body), collapse = ", "), ") ", # class(es)
+      `if`(class, c(" (", paste(class(body), collapse = ", "), ") ")), # class(es)
       `if`(rich,c(
         "|",
         ifelse(is.null(dim(body)), # length or dim
