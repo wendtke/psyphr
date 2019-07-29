@@ -4,10 +4,14 @@
 \alias{stash}
 \title{Stash an R Object onto Disk}
 \usage{
-stash(object, dir_path = tempdir())
+stash(object, dir_path = tempdir(),
+  file_name = paste0(sample(c(letters, LETTERS, 0:9), 20, TRUE), collapse
+  = ""))
 }
 \arguments{
-\item{dir_path}{}
+\item{object}{an R object; name}
+
+\item{dir_path}{path to a directory;character string}
 }
 \value{
 a stash_pointer obj

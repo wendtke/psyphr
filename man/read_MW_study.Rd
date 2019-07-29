@@ -4,10 +4,17 @@
 \alias{read_MW_study}
 \title{Read a study from a directory}
 \usage{
-read_MW_study(path, structure = "flat")
+read_MW_study(path, structure = "flat", stash = FALSE,
+  stash_dir_path = tempdir())
 }
 \arguments{
-\item{path}{a character string; path to a study directory}
+\item{path}{path to a study directory; a character string}
+
+\item{structure}{directory structure; "flat" or "recursive"}
+
+\item{stash}{whether to cache data on disk; logical}
+
+\item{stash_dir_path}{cache directory; a character string}
 }
 \value{
 a data frame; psyphr study S3 object

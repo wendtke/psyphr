@@ -1,7 +1,7 @@
 #' Stash an R Object onto Disk
 #'
-#' @param object
-#' @param dir_path
+#' @param object an R object; name
+#' @param dir_path path to a directory;character string
 #'
 #' @return a stash_pointer obj
 #' @export

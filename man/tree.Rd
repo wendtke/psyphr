@@ -4,13 +4,15 @@
 \alias{tree}
 \title{Recursively Print out the Structure of a List}
 \usage{
-tree(x = .GlobalEnv, limit = 5, unclass = FALSE, compact = TRUE,
-  rich = FALSE, all.names = FALSE)
+tree(x = .GlobalEnv, limit = 5, class = TRUE, unclass = FALSE,
+  compact = TRUE, rich = FALSE, all.names = FALSE)
 }
 \arguments{
 \item{x}{a list or environment}
 
 \item{limit}{recursive level limit}
+
+\item{class}{show class of object}
 
 \item{unclass}{expand list-like objects}
 
