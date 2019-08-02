@@ -1,11 +1,13 @@
 #' Read a study from a directory
 #'
-#' @param path a character string; path to a study directory
+#' @param path path to a study directory; a character string
+#' @param structure directory structure; "flat" or "recursive"
+#' @param stash whether to cache data on disk; logical
+#' @param stash_dir_path cache directory; a character string
 #'
 #' @return a data frame; psyphr study S3 object
 #' @export
-read_MW_study <- function(path, structure = "flat"){
-
+read_MW_study <- function(path, structure = "flat", stash = FALSE, stash_dir_path = tempdir()){
   file_paths <- list.files(path = path, pattern = "\\.xlsx$", full.names = TRUE, recursive = TRUE)
   file_ids <-
     dplyr::case_when(
@@ -15,7 +17,7 @@ read_MW_study <- function(path, structure = "flat"){
         list.files(path = path, pattern = "\\.xlsx$", recursive = TRUE) %>%
         gsub("\\..*$", "", .) %>%
         stringr::str_split(pattern = "/")
-      )
+    )
 
 
   assertthat::assert_that(length(unique(lapply(file_ids, length))) == 1,
@@ -27,13 +29,28 @@ read_MW_study <- function(path, structure = "flat"){
     tibble::as_tibble() %>%
     dplyr::rename_all(
       ~ .x %>% stringr::str_replace("V", "id_")
-      ) %>%
-    dplyr::mutate(data = file_paths %>% purrr::quietly(purrr::map)(read_MW) %>% `[[`("result"),
-           format = data %>% purrr::map(~ attributes(.x)["format"]) %>% unlist()
-           )
+    )
 
+  if (stash){
+    study$stash <-  as.list(vector(length = nrow(study)))
+    for (i in 1:nrow(study)){
+      study$stash[[i]] <- stash(read_MW(file_paths[i]),
+                                dir_path = stash_dir_path,
+                                file_name = paste(file_ids[[i]], collapse = "_"))
+    }
+
+    study$format <- vector(length = nrow(study))
+    for (i in 1:nrow(study)){
+      study$format[[i]] <-  attr(study$stash[[i]](), "format")
+    }
+  } else {
+    study <- study %>%
+      dplyr::mutate(
+        data = file_paths %>% purrr::quietly(purrr::map)(read_MW) %>% `[[`("result"),
+        format = data %>% purrr::map( ~ attributes(.x)["format"]) %>% unlist()
+      )
+  }
   structure(study, class = c("psyphr_study", class(study)))
-
 }
 
 #' Print a Summary of a Psyphr Study
