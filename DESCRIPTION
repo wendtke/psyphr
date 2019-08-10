@@ -2,12 +2,6 @@ Package: psyphr
 Title: Wrangle, Visualize, and Analyze Psychophysiological Data 
 Version: 0.1.0.9000
 Description: Wrangles, visualizes, and analyzes psychophysiological data from MindWare Technologies. 
-    This material is based upon work supported by the 
-    National Science Foundation Graduate Research Fellowship Program 
-    under Grant No. 006784-00002 [to KEW]. Any opinions, findings, and 
-    conclusions or recommendations expressed in this material are those of 
-    the authors and do not necessarily reflect the views of the National 
-    Science Foundation.
 Authors@R: c(person("Kathleen", "Wendt", email = "kathleen.wendt@colostate.edu", 
             role = c("aut", "cre")),
             person("Siqi", "Zhang", email = "iqis.gnahz@gmail.com",
