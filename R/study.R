@@ -61,7 +61,7 @@ read_MW_study <- function(path, structure = "flat", stash = FALSE, stash_dir_pat
 #' @export
 #'
 #' @examples
-print.psyphr_study <- function(study){
+print.psyphr_study <- function(x, ...){
   #
 
 

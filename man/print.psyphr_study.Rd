@@ -4,7 +4,7 @@
 \alias{print.psyphr_study}
 \title{Print a Summary of a Psyphr Study}
 \usage{
-\method{print}{psyphr_study}(study)
+\method{print}{psyphr_study}(x, ...)
 }
 \arguments{
 \item{study}{a psyphr study object}
