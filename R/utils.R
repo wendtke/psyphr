@@ -39,7 +39,7 @@ tree <- function(x = .GlobalEnv, limit = 5, class = TRUE, unclass = FALSE, compa
                paste(dim(body),
                      collapse = " by ")),
         ", ",
-        format(object.size(body), # size (in memory)
+        format(utils::object.size(body), # size (in memory)
                units = "auto",
                standard = "SI"),
         "|"
@@ -104,7 +104,7 @@ tree <- function(x = .GlobalEnv, limit = 5, class = TRUE, unclass = FALSE, compa
     cat(..., sep = "\n")
   }
 
-  out <- capture.output({
+  out <- utils::capture.output({
     cat(element_profile(name = deparse(substitute(x)),
                         body = x),"\n", sep = "")
     traverse(x)
