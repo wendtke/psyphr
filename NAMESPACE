@@ -2,11 +2,10 @@
 
 S3method(print,psyphr_study)
 S3method(print,psyphr_workbook)
-S3method(print,stash_pointer)
+S3method(print,stash_ref)
 export("%>%")
-export(clear_stash)
 export(flatten_study_dir)
-export(is_stash_pointer)
+export(is_stash_ref)
 export(lift_meta)
 export(lift_study_dir)
 export(read_MW)
