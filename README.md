@@ -9,6 +9,10 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/psyphr)](https://cran.r-project.org/package=psyphr)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/wendtke/psyphr?branch=master&svg=true)](https://ci.appveyor.com/project/wendtke/psyphr)
+[![Travis build
+status](https://travis-ci.org/wendtke/psyphr.svg?branch=master)](https://travis-ci.org/wendtke/psyphr)
 <!-- badges: end -->
 
 The `psyphr` R package tranforms
@@ -104,3 +108,9 @@ Foundation Graduate Research Fellowship Program under Grant
 No. 006784-00002 \[to KEW\]. Any opinions, findings, and conclusions or
 recommendations expressed in this material are those of the authors and
 do not necessarily reflect the views of the National Science Foundation.
+
+-----
+
+Please note that the ‘psyphr’ project is released with a [Contributor
+Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
+you agree to abide by its terms.

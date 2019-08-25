@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/psyphr)](https://cran.r-project.org/package=psyphr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/wendtke/psyphr?branch=master&svg=true)](https://ci.appveyor.com/project/wendtke/psyphr)
+[![Travis build status](https://travis-ci.org/wendtke/psyphr.svg?branch=master)](https://travis-ci.org/wendtke/psyphr)
 <!-- badges: end -->
 
 The `psyphr` R package tranforms [psychophysiological](https://en.wikipedia.org/wiki/Psychophysiology) data from 
@@ -77,4 +79,9 @@ The development team considers the following for the package's future:
 `psyphr` was founded at the [Uncoast Unconf 2019](https://github.com/uncoast-unconf/uu-2019) with the help of [Amanda Gadrow](https://github.com/ajmcoqui) and [Audrey McCombs](https://github.com/almccombs). Travel to the Uncoast Unconf was supported by Colorado State University (Department of Human Development and Family Studies and The Graduate School) and the Uncoast Unconf organizing committee, particularly [Dr. Sam Tyner](https://sctyner.github.io/). 
 
 This material is based upon work supported by the National Science Foundation Graduate Research Fellowship Program under Grant No. 006784-00002 [to KEW]. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.
+
+___
+Please note that the 'psyphr' project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.
 
