@@ -47,7 +47,7 @@ read_MW_study <- function(path, structure = "flat", stash = FALSE, stash_dir_pat
     study <- study %>%
       dplyr::mutate(
         data = file_paths %>% purrr::quietly(purrr::map)(read_MW) %>% `[[`("result"),
-        format = data %>% purrr::map( ~ attributes(.x)["format"]) %>% unlist()
+        format = .data$data %>% purrr::map( ~ attributes(.x)["format"]) %>% unlist()
       )
   }
   structure(study, class = c("psyphr_study", class(study)))
@@ -55,12 +55,11 @@ read_MW_study <- function(path, structure = "flat", stash = FALSE, stash_dir_pat
 
 #' Print a Summary of a Psyphr Study
 #'
-#' @param study a psyphr study object
+#' @param x a psyphr study object
+#' @param ... dot-dot-dot
 #'
 #' @return NULL
 #' @export
-#'
-#' @examples
 print.psyphr_study <- function(x, ...){
   #
 

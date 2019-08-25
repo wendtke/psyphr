@@ -7,7 +7,9 @@
 \method{print}{psyphr_study}(x, ...)
 }
 \arguments{
-\item{study}{a psyphr study object}
+\item{x}{a psyphr study object}
+
+\item{...}{dot-dot-dot}
 }
 \description{
 Print a Summary of a Psyphr Study

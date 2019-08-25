@@ -37,12 +37,13 @@ read_MW <- function(path){
 
 #' Print Brief Info on psyphr_workbook
 #'
-#' @param x
+#' @param x a psyphr workbook
+#' @param ... dot-dot-dot
 #'
 #' @return NULL
 #' @export
 #'
-print.psyphr_workbook <- function(x){
+print.psyphr_workbook <- function(x, ...){
   cat("<psyphr_workbook>", attr(x, "device_vendor"), attr(x, "format"), "\n",
       "file:", attr(x, "file_path"), "\n")
 }
@@ -354,7 +355,7 @@ bare_name <- function(path){
 # Gather segments
 gather_segments <- function(.data){
   .data %>%
-    dplyr::mutate(`Segment Index` = 1:nrow(.)) %>%
-    tidyr::gather(key = "Segment", value = "Value", -`Segment Index`) %>%
-    dplyr::mutate(`Session Index` = 1:nrow(.))
+    dplyr::mutate("Segment Index" = 1:nrow(.data)) %>%
+    tidyr::gather(key = "Segment", value = "Value", -"Segment Index") %>%
+    dplyr::mutate("Session Index" = 1:nrow(.data))
 }
