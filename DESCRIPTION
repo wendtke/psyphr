@@ -15,7 +15,9 @@ BugReports: https://github.com/wendtke/psyphr/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Imports: 
     dplyr,
     readxl,
@@ -28,3 +30,4 @@ Imports:
     stringr,
     tibble,
     tidyr
+VignetteBuilder: knitr
