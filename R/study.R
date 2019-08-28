@@ -1,3 +1,16 @@
+#' Read a study
+#'
+#' @param path path to a study directory; a character string
+#' @param ... dot-dot-dot
+#'
+#' @return
+#' @export
+read_study <- function(path, ...){
+  # this is now just a placeholder function
+  # its job is to detect vendor and dispatch corresponding function
+}
+
+
 #' Read a study from a directory
 #'
 #' @param path path to a study directory; a character string
