@@ -3,7 +3,7 @@
 #' @param path path to a study directory; a character string
 #' @param ... dot-dot-dot
 #'
-#' @return
+#' @return a data frame; psyphr study S3 object
 #' @export
 read_study <- function(path, ...){
   # this is now just a placeholder function

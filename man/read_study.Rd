@@ -11,6 +11,9 @@ read_study(path, ...)
 
 \item{...}{dot-dot-dot}
 }
+\value{
+a data frame; psyphr study S3 object
+}
 \description{
 Read a study
 }
