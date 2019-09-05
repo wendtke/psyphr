@@ -1,7 +1,7 @@
-Package: psyphr
-Title: Wrangle, Visualize, and Analyze Psychophysiological Data 
+Package: psyphr.read
+Title: Read and Process Psychophysiological Data 
 Version: 0.1.0.9000
-Description: Wrangles, visualizes, and analyzes psychophysiological data from MindWare Technologies. 
+Description: Read and process psychophysiological readings from MindWare Technologies 
 Authors@R: c(person("Kathleen", "Wendt", email = "kathleen.wendt@colostate.edu", 
             role = c("aut", "cre")),
             person("Siqi", "Zhang", email = "iqis.gnahz@gmail.com",
@@ -16,8 +16,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Suggests: 
     testthat,
-    knitr,
-    rmarkdown
+    knitr
 Imports: 
     dplyr,
     readxl,
